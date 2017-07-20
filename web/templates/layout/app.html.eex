@@ -7,29 +7,28 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Tater!</title>
+    <title>Theme Feature Annotations</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
+    <div class="page-wrapper">
+      <header class="page-header">
+        <h1>Theme Feature Annotations</h1>
+
         <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
         </nav>
-        <span class="logo"></span>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
-      <main role="main">
+      <main role="main" class="page-content">
         <%= render @view_module, @view_template, assigns %>
       </main>
 
-    </div> <!-- /container -->
+      <footer class="page-footer"></footer>
+    </div>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
