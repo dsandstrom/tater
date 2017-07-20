@@ -7,12 +7,12 @@ defmodule Tater.FeatureControllerTest do
 
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, feature_path(conn, :index)
-    assert html_response(conn, 200) =~ "Listing features"
+    assert html_response(conn, 200) =~ "Features"
   end
 
   test "renders form for new resources", %{conn: conn} do
     conn = get conn, feature_path(conn, :new)
-    assert html_response(conn, 200) =~ "New feature"
+    assert html_response(conn, 200) =~ "New Feature"
   end
 
   test "creates resource and redirects when data is valid", %{conn: conn} do
@@ -23,13 +23,13 @@ defmodule Tater.FeatureControllerTest do
 
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
     conn = post conn, feature_path(conn, :create), feature: @invalid_attrs
-    assert html_response(conn, 200) =~ "New feature"
+    assert html_response(conn, 200) =~ "New Feature"
   end
 
   test "shows chosen resource", %{conn: conn} do
     feature = Repo.insert! %Feature{}
     conn = get conn, feature_path(conn, :show, feature)
-    assert html_response(conn, 200) =~ "Show feature"
+    assert html_response(conn, 200) =~ "#{feature.name}"
   end
 
   test "renders page not found when id is nonexistent", %{conn: conn} do
@@ -41,7 +41,7 @@ defmodule Tater.FeatureControllerTest do
   test "renders form for editing chosen resource", %{conn: conn} do
     feature = Repo.insert! %Feature{}
     conn = get conn, feature_path(conn, :edit, feature)
-    assert html_response(conn, 200) =~ "Edit feature"
+    assert html_response(conn, 200) =~ "Edit #{feature.name} Feature"
   end
 
   test "updates chosen resource and redirects when data is valid", %{conn: conn} do
@@ -54,7 +54,8 @@ defmodule Tater.FeatureControllerTest do
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
     feature = Repo.insert! %Feature{}
     conn = put conn, feature_path(conn, :update, feature), feature: @invalid_attrs
-    assert html_response(conn, 200) =~ "Edit feature"
+
+    assert html_response(conn, 200) =~ "Edit #{feature.name} Feature"
   end
 
   test "deletes chosen resource", %{conn: conn} do

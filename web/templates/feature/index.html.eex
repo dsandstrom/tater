@@ -1,4 +1,7 @@
-<h2>Listing features</h2>
+<header class="content-header">
+  <h2>Features</h2>
+  <%= link "New feature", to: feature_path(@conn, :new), class: "button" %>
+</header>
 
 <table class="table">
   <thead>
@@ -13,18 +16,19 @@
   <tbody>
 <%= for feature <- @features do %>
     <tr>
-      <td><%= feature.name %></td>
+      <td>
+        <%= link feature.name, to: feature_path(@conn, :show, feature) %>
+      </td>
       <td><%= feature.mapping %></td>
       <td><%= feature.annotation %></td>
 
       <td class="text-right">
-        <%= link "Show", to: feature_path(@conn, :show, feature), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: feature_path(@conn, :edit, feature), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: feature_path(@conn, :delete, feature), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Edit", to: feature_path(@conn, :edit, feature) %>
+        <%= link "Delete", to: feature_path(@conn, :delete, feature),
+                           method: :delete,
+                           data: [confirm: "Are you sure?"] %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
-
-<%= link "New feature", to: feature_path(@conn, :new) %>

@@ -1,4 +1,4 @@
-<h2>Edit feature</h2>
+<h2>Edit <%= @feature.name %> Feature</h2>
 
 <%= render "form.html", changeset: @changeset,
                         action: feature_path(@conn, :update, @feature) %>

@@ -8,3 +8,18 @@
 .page-header {
   padding-top: 1rem;
 }
+
+.content-header {
+  margin-bottom: 2rem;
+
+  @include breakpoint(medium up) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+
+    h2 {
+      margin: 0 2rem 1rem 0;
+    }
+  }
+}
