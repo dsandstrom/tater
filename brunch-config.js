@@ -58,8 +58,7 @@ exports.config = {
     sass: {
       options: {
         includePaths: [
-          "node_modules/normalize.css",
-          "node_modules/milligram/src"
+          "node_modules",
         ]
       }
     }
