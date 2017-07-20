@@ -1,0 +1,30 @@
+<h2>Listing features</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mapping</th>
+      <th>Annotation</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for feature <- @features do %>
+    <tr>
+      <td><%= feature.name %></td>
+      <td><%= feature.mapping %></td>
+      <td><%= feature.annotation %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: feature_path(@conn, :show, feature), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: feature_path(@conn, :edit, feature), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: feature_path(@conn, :delete, feature), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New feature", to: feature_path(@conn, :new) %>
