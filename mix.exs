@@ -39,7 +39,8 @@ defmodule Tater.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:mix_test_watch, "~> 0.3", only: :dev, runtime: false},
-     {:ex_unit_notifier, "~> 0.1", only: :test}]
+     {:ex_unit_notifier, "~> 0.1", only: :test},
+     {:dogma, "~> 0.1", only: :dev}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
