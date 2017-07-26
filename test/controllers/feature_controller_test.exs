@@ -2,7 +2,8 @@ defmodule Tater.FeatureControllerTest do
   use Tater.ConnCase
 
   alias Tater.Feature
-  @valid_attrs %{annotation: "some content", mapping: "some content", name: "some content"}
+  @valid_attrs %{annotation: "some content", mapping: "some-content",
+                 name: "some content"}
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do
@@ -21,7 +22,8 @@ defmodule Tater.FeatureControllerTest do
     assert Repo.get_by(Feature, @valid_attrs)
   end
 
-  test "does not create resource and renders errors when data is invalid", %{conn: conn} do
+  test "does not create resource and renders errors when data is invalid",
+       %{conn: conn} do
     conn = post conn, feature_path(conn, :create), feature: @invalid_attrs
     assert html_response(conn, 200) =~ "New Feature"
   end
@@ -44,16 +46,19 @@ defmodule Tater.FeatureControllerTest do
     assert html_response(conn, 200) =~ "Edit #{feature.name} Feature"
   end
 
-  test "updates chosen resource and redirects when data is valid", %{conn: conn} do
+  test "updates chosen resource and redirects when data is valid",
+       %{conn: conn} do
     feature = Repo.insert! %Feature{}
     conn = put conn, feature_path(conn, :update, feature), feature: @valid_attrs
     assert redirected_to(conn) == feature_path(conn, :show, feature)
     assert Repo.get_by(Feature, @valid_attrs)
   end
 
-  test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
+  test "doesn't update chosen resource and renders errors when data is invalid",
+       %{conn: conn} do
     feature = Repo.insert! %Feature{}
-    conn = put conn, feature_path(conn, :update, feature), feature: @invalid_attrs
+    conn = put conn, feature_path(conn, :update, feature),
+               feature: @invalid_attrs
 
     assert html_response(conn, 200) =~ "Edit #{feature.name} Feature"
   end
