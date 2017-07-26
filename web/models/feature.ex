@@ -1,4 +1,6 @@
 defmodule Tater.Feature do
+  @moduledoc "Theme feature that will be annotated"
+
   use Tater.Web, :model
 
   schema "features" do
@@ -24,7 +26,7 @@ defmodule Tater.Feature do
   end
 
   # when mapping is being changed
-  defp auto_map(%Ecto.Changeset{changes: %{name: name, mapping: mapping}} = changeset) do
+  defp auto_map(%Ecto.Changeset{changes: %{name: _, mapping: _}} = changeset) do
     changeset
   end
 
