@@ -51,7 +51,7 @@ defmodule Tater.Feature do
     # TODO: loop through test mappings instead of just using index
     mapping = mapping_option(name)
     query = from f in Tater.Feature, where: f.mapping == ^mapping
-    case query |> Tater.Repo.all do
+    case Tater.Repo.all(query) do
       [] -> mapping
       matches -> mapping_option(mapping, length(matches))
     end
