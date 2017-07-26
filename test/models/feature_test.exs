@@ -82,9 +82,15 @@ defmodule Tater.FeatureTest do
       assert fetch_field(changeset, :mapping) == {:changes, "custom"}
     end
 
-    # FIXME: should append -3 to next
-    test "when auto mapping is already taken, appends '-2'" do
+    test "when default auto mapping is already taken, appends '-1'" do
       Repo.insert! %Feature{mapping: "hero"}
+      changeset = Feature.changeset(%Feature{}, %{name: "Hero"})
+      assert fetch_field(changeset, :mapping) == {:changes, "hero-1"}
+    end
+
+    test "when default and -1 auto mapping is already taken, appends '-2'" do
+      Repo.insert! %Feature{mapping: "hero"}
+      Repo.insert! %Feature{mapping: "hero-1"}
       changeset = Feature.changeset(%Feature{}, %{name: "Hero"})
       assert fetch_field(changeset, :mapping) == {:changes, "hero-2"}
     end

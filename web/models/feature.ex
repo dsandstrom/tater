@@ -47,16 +47,24 @@ defmodule Tater.Feature do
   end
 
   defp mapping_option(name, index) do
-    "#{mapping_option(name)}-#{index + 1}"
+    "#{mapping_option(name)}-#{index}"
   end
 
   defp first_available_mapping(name) do
-    # TODO: loop through test mappings instead of just using index
     mapping = mapping_option(name)
     query = from f in Tater.Feature, where: f.mapping == ^mapping
     case Tater.Repo.all(query) do
       [] -> mapping
-      matches -> mapping_option(mapping, length(matches))
+      matches -> first_available_mapping(name, 1)
+    end
+  end
+
+  defp first_available_mapping(name, index) do
+    mapping = mapping_option(name, index)
+    query = from f in Tater.Feature, where: f.mapping == ^mapping
+    case Tater.Repo.all(query) do
+      [] -> mapping
+      matches -> first_available_mapping(name, index + 1)
     end
   end
 end
