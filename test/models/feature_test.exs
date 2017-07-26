@@ -23,6 +23,12 @@ defmodule Tater.FeatureTest do
     refute changeset.valid?
   end
 
+  test "changeset with mapping longer than 20 characters" do
+    attrs = %{@valid_attrs | mapping: String.duplicate("a", 21)}
+    changeset = Feature.changeset(%Feature{}, attrs)
+    refute changeset.valid?
+  end
+
   describe "auto mapping" do
     test "generates one when blank" do
       changeset = Feature.changeset(%Feature{}, %{name: "Hero", mapping: ""})
