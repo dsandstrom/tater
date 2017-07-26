@@ -61,8 +61,8 @@ defmodule Tater.FeatureTest do
     end
 
     test "generates one when not changing mapping" do
-      changeset = Feature.changeset(%Feature{},
-                                    %{name: "Hero", annotation: "some content"})
+      attrs = %{name: "Hero", annotation: "some content"}
+      changeset = Feature.changeset(%Feature{}, attrs)
       assert fetch_field(changeset, :mapping) == {:changes, "hero"}
     end
 
@@ -77,8 +77,8 @@ defmodule Tater.FeatureTest do
     end
 
     test "doesn't auto map when getting changed" do
-      changeset = Feature.changeset(%Feature{},
-                                    %{name: "Hero", mapping: "custom"})
+      attrs = %{name: "Hero", mapping: "custom"}
+      changeset = Feature.changeset(%Feature{}, attrs)
       assert fetch_field(changeset, :mapping) == {:changes, "custom"}
     end
 
