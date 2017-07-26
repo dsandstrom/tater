@@ -33,8 +33,10 @@ defmodule Tater.FeatureTest do
       %Feature{}
       |> Feature.changeset(@valid_attrs)
       |> Tater.Repo.insert!
-      feature = %Feature{}
-      |> Feature.changeset(@valid_attrs)
+      feature =
+        %Feature{}
+        |> Feature.changeset(@valid_attrs)
+
       {:error, changeset} = Repo.insert(feature)
       refute changeset.valid?
       assert changeset.errors[:name] == {"has already been taken", []}
@@ -43,11 +45,13 @@ defmodule Tater.FeatureTest do
     test "changeset is invalid if mapping is used already" do
       attrs = @valid_attrs |> Map.put(:mapping, "same-mapping")
       %Feature{}
-        |> Feature.changeset(attrs)
-        |> Tater.Repo.insert!
+      |> Feature.changeset(attrs)
+      |> Tater.Repo.insert!
       attrs = attrs |> Map.put(:name, "Different Name")
-      feature = %Feature{}
+      feature =
+        %Feature{}
         |> Feature.changeset(attrs)
+
       assert {:error, changeset} = Repo.insert(feature)
       refute changeset.valid?
       assert changeset.errors[:mapping] == {"has already been taken", []}

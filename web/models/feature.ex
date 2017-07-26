@@ -25,20 +25,35 @@ defmodule Tater.Feature do
     |> unique_constraint(:mapping)
   end
 
-  # when mapping is being changed
-  defp auto_map(%Ecto.Changeset{changes: %{name: _, mapping: _}} = changeset) do
-    changeset
+  # mapping is being manually set
+  defp auto_map(%Ecto.Changeset{changes: %{name: _, mapping: _}} = changeset),
+    do: changeset
+  # no mapping
+  defp auto_map(%Ecto.Changeset{changes: %{name: name}} = changeset),
+    do: changeset |> put_change(:mapping, first_available_mapping(name))
+  # no changes
+  defp auto_map(changeset),
+    do: changeset
+
+  defp first_available_mapping(name) do
+    mapping = mapping_option(name)
+    if mapping_is_available(mapping) do
+      mapping
+    else
+      first_available_mapping(name, 1)
+    end
   end
 
-  # when no mapping
-  defp auto_map(%Ecto.Changeset{changes: %{name: name}} = changeset) do
-    changeset |> put_change(:mapping, first_available_mapping(name))
+  defp first_available_mapping(name, index) do
+    mapping = mapping_option(name, index)
+    if mapping_is_available(mapping) do
+      mapping
+    else
+      first_available_mapping(name, index + 1)
+    end
   end
 
-  defp auto_map(changeset) do
-    changeset
-  end
-
+  defp mapping_option(name, index), do: "#{mapping_option(name)}-#{index}"
   defp mapping_option(name) do
     name
     |> String.trim
@@ -46,25 +61,8 @@ defmodule Tater.Feature do
     |> String.replace(~r/\s+/, "-")
   end
 
-  defp mapping_option(name, index) do
-    "#{mapping_option(name)}-#{index}"
-  end
-
-  defp first_available_mapping(name) do
-    mapping = mapping_option(name)
+  defp mapping_is_available(mapping) do
     query = from f in Tater.Feature, where: f.mapping == ^mapping
-    case Tater.Repo.all(query) do
-      [] -> mapping
-      matches -> first_available_mapping(name, 1)
-    end
-  end
-
-  defp first_available_mapping(name, index) do
-    mapping = mapping_option(name, index)
-    query = from f in Tater.Feature, where: f.mapping == ^mapping
-    case Tater.Repo.all(query) do
-      [] -> mapping
-      matches -> first_available_mapping(name, index + 1)
-    end
+    length(Tater.Repo.all(query)) == 0
   end
 end
