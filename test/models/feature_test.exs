@@ -3,33 +3,34 @@ defmodule Tater.FeatureTest do
 
   alias Tater.Feature
 
-  @valid_attrs %{annotation: "some content", mapping: "some-content",
-                 name: "some content"}
+  @valid_attrs %{name: "some content", annotation: "some content"}
   @invalid_attrs %{name: ""}
 
-  test "changeset with valid attributes" do
-    changeset = Feature.changeset(%Feature{}, @valid_attrs)
-    assert changeset.valid?
+  describe "validations" do
+    test "changeset with valid attributes" do
+      changeset = Feature.changeset(%Feature{}, @valid_attrs)
+      assert changeset.valid?
+    end
+
+    test "changeset with invalid attributes" do
+      changeset = Feature.changeset(%Feature{}, @invalid_attrs)
+      refute changeset.valid?
+    end
+
+    test "changeset with mapping with space" do
+      attrs = @valid_attrs |> Map.put(:mapping, "not valid")
+      changeset = Feature.changeset(%Feature{}, attrs)
+      refute changeset.valid?
+    end
+
+    test "changeset with mapping longer than 20 characters" do
+      attrs = @valid_attrs |> Map.put(:mapping, String.duplicate("a", 21))
+      changeset = Feature.changeset(%Feature{}, attrs)
+      refute changeset.valid?
+    end
   end
 
-  test "changeset with invalid attributes" do
-    changeset = Feature.changeset(%Feature{}, @invalid_attrs)
-    refute changeset.valid?
-  end
-
-  test "changeset with mapping with space" do
-    attrs = %{@valid_attrs | mapping: "not valid"}
-    changeset = Feature.changeset(%Feature{}, attrs)
-    refute changeset.valid?
-  end
-
-  test "changeset with mapping longer than 20 characters" do
-    attrs = %{@valid_attrs | mapping: String.duplicate("a", 21)}
-    changeset = Feature.changeset(%Feature{}, attrs)
-    refute changeset.valid?
-  end
-
-  describe "auto mapping" do
+  describe "#auto_map" do
     test "generates one when blank" do
       changeset = Feature.changeset(%Feature{}, %{name: "Hero", mapping: ""})
       assert fetch_field(changeset, :mapping) == {:changes, "hero"}
