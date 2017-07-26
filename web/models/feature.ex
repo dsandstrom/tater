@@ -1,7 +1,6 @@
 defmodule Tater.Feature do
   use Tater.Web, :model
 
-  # TODO: validate mapping & name are unique
   schema "features" do
     field :name, :string
     field :mapping, :string
@@ -20,6 +19,8 @@ defmodule Tater.Feature do
     |> validate_required([:name, :mapping, :annotation])
     |> validate_format(:mapping, ~r/\A[\w-]+\z/)
     |> validate_length(:mapping, max: 20)
+    |> unique_constraint(:name)
+    |> unique_constraint(:mapping)
   end
 
   # when mapping is being changed

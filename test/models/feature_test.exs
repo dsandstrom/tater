@@ -28,6 +28,30 @@ defmodule Tater.FeatureTest do
       changeset = Feature.changeset(%Feature{}, attrs)
       refute changeset.valid?
     end
+
+    test "changeset is invalid if name is used already" do
+      %Feature{}
+      |> Feature.changeset(@valid_attrs)
+      |> Tater.Repo.insert!
+      feature = %Feature{}
+      |> Feature.changeset(@valid_attrs)
+      {:error, changeset} = Repo.insert(feature)
+      refute changeset.valid?
+      assert changeset.errors[:name] == {"has already been taken", []}
+    end
+
+    test "changeset is invalid if mapping is used already" do
+      attrs = @valid_attrs |> Map.put(:mapping, "same-mapping")
+      %Feature{}
+        |> Feature.changeset(attrs)
+        |> Tater.Repo.insert!
+      attrs = attrs |> Map.put(:name, "Different Name")
+      feature = %Feature{}
+        |> Feature.changeset(attrs)
+      assert {:error, changeset} = Repo.insert(feature)
+      refute changeset.valid?
+      assert changeset.errors[:mapping] == {"has already been taken", []}
+    end
   end
 
   describe "#auto_map" do
@@ -58,6 +82,7 @@ defmodule Tater.FeatureTest do
       assert fetch_field(changeset, :mapping) == {:changes, "custom"}
     end
 
+    # FIXME: should append -3 to next
     test "when auto mapping is already taken, appends '-2'" do
       Repo.insert! %Feature{mapping: "hero"}
       changeset = Feature.changeset(%Feature{}, %{name: "Hero"})
