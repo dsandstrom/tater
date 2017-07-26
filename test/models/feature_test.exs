@@ -17,6 +17,12 @@ defmodule Tater.FeatureTest do
     refute changeset.valid?
   end
 
+  test "changeset with mapping with space" do
+    attrs = %{@valid_attrs | mapping: "not valid"}
+    changeset = Feature.changeset(%Feature{}, attrs)
+    refute changeset.valid?
+  end
+
   describe "auto mapping" do
     test "generates one when blank" do
       changeset = Feature.changeset(%Feature{}, %{name: "Hero", mapping: ""})

@@ -1,7 +1,7 @@
 defmodule Tater.Feature do
   use Tater.Web, :model
 
-  # TODO: validate mapping (no spaces, length, unique)
+  # TODO: validate mapping (length, unique)
   schema "features" do
     field :name, :string
     field :mapping, :string
@@ -18,6 +18,7 @@ defmodule Tater.Feature do
     |> cast(params, [:name, :mapping, :annotation])
     |> auto_map
     |> validate_required([:name, :mapping, :annotation])
+    |> validate_format(:mapping, ~r/\A[\w-]+\z/)
   end
 
   # when mapping is being changed
