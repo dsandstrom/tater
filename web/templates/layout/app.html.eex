@@ -22,11 +22,11 @@
         </div>
       </header>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
       <main role="main" class="page-content">
         <div class="page">
+          <%= show_flash(@conn, :info) %>
+          <%= show_flash(@conn, :error) %>
+
           <%= render @view_module, @view_template, assigns %>
         </div>
       </main>
