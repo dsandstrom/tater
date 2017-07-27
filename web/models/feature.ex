@@ -28,6 +28,9 @@ defmodule Tater.Feature do
   # mapping is being manually set
   defp auto_map(%Ecto.Changeset{changes: %{name: _, mapping: _}} = changeset),
     do: changeset
+  # trying to change name to nil
+  defp auto_map(%Ecto.Changeset{changes: %{name: nil}} = changeset),
+    do: changeset
   # no mapping
   defp auto_map(%Ecto.Changeset{changes: %{name: name}} = changeset),
     do: changeset |> put_change(:mapping, first_available_mapping(name))
