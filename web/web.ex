@@ -44,7 +44,8 @@ defmodule Tater.Web do
       use Phoenix.View, root: "web/templates"
 
       # Import convenience functions from controllers
-      import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
+      import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2,
+                                        view_module: 1]
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
@@ -52,6 +53,8 @@ defmodule Tater.Web do
       import Tater.Router.Helpers
       import Tater.ErrorHelpers
       import Tater.Gettext
+
+      import Tater.FormHelpers
     end
   end
 
