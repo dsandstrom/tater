@@ -16,7 +16,7 @@ defmodule Tater.Router do
   scope "/", Tater do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", FeatureController, :index
     resources "/features", FeatureController
   end
   # Other scopes may use custom stacks.
