@@ -1,0 +1,14 @@
+.form-group {
+  margin-bottom: 1.5rem;
+
+  input {
+    margin-bottom: 0;
+  }
+
+  .help-block {
+    display: block;
+    padding: .5rem 1rem;
+    background: $color-tertiary;
+    color: $color-failure;
+  }
+}
