@@ -34,9 +34,10 @@ defmodule Tater.Feature do
   # trying to change name to nil
   defp auto_map(%Ecto.Changeset{changes: %{name: nil}} = changeset),
     do: changeset
+  # trying to set mapping to nil
   defp auto_map(%Ecto.Changeset{changes: %{mapping: nil}, data: %{name: name, mapping: original_mapping}} = changeset) do
     if mapping_option(name) == original_mapping do
-      # ignore change
+      # keep original
       changeset |> delete_change(:mapping)
     else
       changeset |> put_change(:mapping, first_available_mapping(name))
