@@ -112,5 +112,19 @@ defmodule Tater.FeatureTest do
       changeset = Feature.changeset(feature, attrs)
       assert fetch_field(changeset, :mapping) == {:changes, "new-name"}
     end
+
+    test "when editing, auto maps when resetting mapping" do
+      feature = Repo.insert! %Feature{name: "Hero", mapping: "wrong"}
+      attrs = %{mapping: nil}
+      changeset = Feature.changeset(feature, attrs)
+      assert fetch_field(changeset, :mapping) == {:changes, "hero"}
+    end
+
+    test "when editing, doesn't allow removing mapping" do
+      feature = Repo.insert! %Feature{name: "Hero", mapping: "hero"}
+      attrs = %{mapping: nil}
+      changeset = Feature.changeset(feature, attrs)
+      assert fetch_field(changeset, :mapping) == {:data, "hero"}
+    end
   end
 end
