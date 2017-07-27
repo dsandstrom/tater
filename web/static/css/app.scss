@@ -7,6 +7,9 @@ $color-tertiary: #f4f5f6;
 $color-quaternary: #d1d1d1;
 $color-quinary: #e1e1e1;
 
+$color-success: green;
+$color-failure: orange;
+
 // plugins
 @import 'normalize.css/normalize';
 @import 'milligram-custom';
