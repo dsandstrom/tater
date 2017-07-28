@@ -1,4 +1,4 @@
-<% confirm = "Are you sure you want to remove #{@feature.name}?" %>
+<% confirm = "Are you sure you want to remove #{@feature.name} feature?" %>
 
 <div id="feature-<%= @feature.id %>" class="feature">
   <header>
@@ -15,7 +15,7 @@
   <footer class="feature-links">
     <%= link "Edit", to: feature_path(@conn, :edit, @feature),
                      class: "button button-outline" %>
-    <%= link "Delete", to: feature_path(@conn, :delete, @feature),
+    <%= link "Remove", to: feature_path(@conn, :delete, @feature),
                        method: :delete,
                        class: "button button-outline",
                        data: [confirm: confirm] %>
