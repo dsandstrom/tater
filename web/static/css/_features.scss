@@ -1,0 +1,20 @@
+.feature {
+  margin-bottom: 2rem;
+  padding: 2rem;
+  border-radius: $theme-border-radius;
+  background: $white;
+
+  header {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .feature-name {
+    margin-right: 1rem;
+  }
+
+  .feature-mapping {
+    font-size: .85em;
+    color: $color-quinary;
+  }
+}
