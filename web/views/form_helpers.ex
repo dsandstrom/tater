@@ -24,11 +24,14 @@ defmodule Tater.FormHelpers do
     wrapper_opts = [class: "form-group #{state_class(form, field)}"]
     label_opts = [class: "control-label"]
     input_opts = [class: "form-control"]
-
-    if validate do
-      validations = Phoenix.HTML.Form.input_validations(form, field)
-      input_opts = Keyword.merge(validations, input_opts)
-    end
+    input_opts =
+      if validate do
+        form
+        |> Phoenix.HTML.Form.input_validations(field)
+        |> Keyword.merge(input_opts)
+      else
+        input_opts
+      end
 
     content_tag :div, wrapper_opts do
       label = label(form, field, humanize(field), label_opts)
