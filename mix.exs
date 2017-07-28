@@ -17,9 +17,9 @@ defmodule Tater.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Tater, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex]]
+    [mod: {Tater, []}, applications:
+      [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
+       :phoenix_ecto, :postgrex, :scrivener_ecto, :scrivener_html]]
   end
 
   # Specifies which paths to compile per environment.
@@ -40,7 +40,9 @@ defmodule Tater.Mixfile do
      {:cowboy, "~> 1.0"},
      {:mix_test_watch, "~> 0.3", only: :dev, runtime: false},
      {:ex_unit_notifier, "~> 0.1", only: :test},
-     {:dogma, "~> 0.1", only: :dev}]
+     {:dogma, "~> 0.1", only: :dev},
+     {:scrivener_ecto, "~> 1.0"},
+     {:scrivener_html, "~> 1.7"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
