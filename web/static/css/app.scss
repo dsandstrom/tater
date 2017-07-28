@@ -1,19 +1,39 @@
 // This file is for your main application css.
 
-$color-initial: #fff;
-$color-primary: #9b4dca;
-$color-secondary: #606c76;
-$color-tertiary: #f4f5f6;
-$color-quaternary: #d1d1d1;
-$color-quinary: #e1e1e1;
+$color-light: #f2f3f3;
+$color-accent-light: #8ea4af;
+$color-brand: #928370;
+$color-accent-dark: #7b7a7c;
+$color-dark: #1e202e;
 
-$color-success: green;
-$color-failure: orange;
+$green: #61a25a;
+$orange: #de9222;
+$red: #f44336;
+
+// colors
+$white: #fff;
+$gray: $color-accent-dark;
+$light-gray: lighten($gray, 35%);
+$lighter-gray: lighten($gray, 40%);
+
+
+$color-initial: $color-light;
+$color-primary: $color-brand;
+$color-secondary: $color-accent-dark;
+$color-tertiary: $color-accent-light;
+$color-quaternary: $light-gray;
+$color-quinary: $lighter-gray;
+
+$color-success: $green;
+$color-failure: $orange;
+
+// theme variables
+$theme-border-radius: 3px;
 
 // plugins
 @import 'normalize.css/normalize';
 @import 'milligram-custom';
-@import 'foundation-sites/scss/util/_unit';
+@import 'foundation-sites/scss/util/unit';
 @import 'foundation-sites/scss/util/breakpoint';
 
 // app
