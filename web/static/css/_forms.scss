@@ -25,7 +25,8 @@ input[type='submit'],
   position: relative;
   margin-bottom: 1.5rem;
 
-  input {
+  input,
+  textarea {
     margin-bottom: 0;
   }
 
@@ -41,6 +42,12 @@ input[type='submit'],
   &.has-error {
     label {
       color: $color-warning;
+    }
+  }
+
+  &.button-form-group {
+    p {
+      margin-bottom: 1rem;
     }
   }
 }

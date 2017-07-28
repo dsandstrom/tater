@@ -9,8 +9,8 @@
 
   <%= input f, :annotation, using: :textarea %>
 
-  <div class="form-group">
-    <p>*All fields required</p>
+  <div class="form-group button-form-group">
+    <p><small>*All fields required</small></p>
     <%= submit "Submit", class: "button button-success" %>
   </div>
 <% end %>
