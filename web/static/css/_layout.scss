@@ -80,4 +80,8 @@ body {
   &.alert-danger {
     border-color: $color-failure;
   }
+
+  &.alert-info {
+    border-color: $color-success;
+  }
 }
