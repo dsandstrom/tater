@@ -5,7 +5,7 @@ defmodule Tater.FeatureView do
 
   use Tater.Web, :view
 
-  def render_features(features = [], _), do: content_tag(:p, "None yet")
+  def render_features(_f = [], _a), do: content_tag(:p, "None yet")
   # TODO: pass `feature` variable to partial
   # get compilation error saying undefined feature
   def render_features(features, assigns) do
