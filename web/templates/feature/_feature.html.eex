@@ -1,0 +1,21 @@
+<% confirm = "Are you sure you want to remove #{@feature.name}?" %>
+
+<div id="feature-<%= @feature.id %>" class="feature">
+  <header>
+    <h3 class="feature-name">
+      <%= link @feature.name, to: feature_path(@conn, :show, @feature) %>
+    </h3>
+    <code class="feature-mapping"><%= @feature.mapping %></code>
+  </header>
+
+  <article>
+    <p class="feature-annotation"><%= @feature.annotation %></p>
+  </article>
+
+  <footer class="feature-links">
+    <%= link "Edit", to: feature_path(@conn, :edit, @feature) %>
+    <%= link "Delete", to: feature_path(@conn, :delete, @feature),
+                       method: :delete,
+                       data: [confirm: confirm] %>
+  </footer>
+</div>
