@@ -14,8 +14,19 @@ body {
   background: $color-dark;
   color: $color-initial;
 
-  h1 {
+  .site-heading {
     margin-bottom: 0;
+
+    a {
+      &:link,
+      &:visited {
+        color: $lighter-gray;
+      }
+
+      &:hover {
+        color: $light-gray;
+      }
+    }
   }
 }
 
