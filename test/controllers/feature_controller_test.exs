@@ -31,7 +31,7 @@ defmodule Tater.FeatureControllerTest do
   test "shows chosen resource", %{conn: conn} do
     feature = Repo.insert! %Feature{}
     conn = get conn, feature_path(conn, :show, feature)
-    assert html_response(conn, 200) =~ "#{feature.name}"
+    assert html_response(conn, 200) =~ to_string(feature.name)
   end
 
   test "renders page not found when id is nonexistent", %{conn: conn} do
