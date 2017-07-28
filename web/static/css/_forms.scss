@@ -33,10 +33,11 @@ input[type='submit'],
   .help-block {
     display: block;
     position: absolute;
+    top: 0;
     right: 0;
-    bottom: 0;
     padding: .6rem 1rem;
     color: $color-warning;
+    font-size: .85em;
   }
 
   &.has-error {
