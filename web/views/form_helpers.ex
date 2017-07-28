@@ -18,13 +18,7 @@ defmodule Tater.FormHelpers do
 
   # http://blog.plataformatec.com.br/2016/09/dynamic-forms-with-phoenix/
   def input(form, field, opts \\ %{}) do
-    validate =
-      if opts[:validate] != nil do
-        opts[:validate]
-      else
-        false
-      end
-
+    validate = if opts[:validate] != nil, do: opts[:validate], else: false
     type = opts[:using] || Phoenix.HTML.Form.input_type(form, field)
 
     wrapper_opts = [class: "form-group #{state_class(form, field)}"]
