@@ -50,6 +50,18 @@ body {
 .content-header {
   margin-bottom: 2rem;
 
+  .heading-wrapper {
+    margin-bottom: 1rem;
+
+    h2 {
+      margin-bottom: 0;
+    }
+  }
+
+  .button {
+    margin-bottom: 0;
+  }
+
   @include breakpoint(medium up) {
     display: flex;
     flex-wrap: wrap;

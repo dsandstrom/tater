@@ -1,23 +1,12 @@
-<h2><%= @feature.name %></h2>
+<header class="content-header">
+  <div class="heading-wrapper">
+    <h2 class="feature-name"><%= @feature.name %></h2>
+    <code class="feature-mapping"><%= @feature.mapping %></code>
+  </div>
 
-<ul>
+  <%= link "Edit", to: feature_path(@conn, :edit, @feature), class: "button" %>
+</header>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @feature.name %>
-  </li>
+<p class="feature-annotation"><%= @feature.annotation %></p>
 
-  <li>
-    <strong>Mapping:</strong>
-    <%= @feature.mapping %>
-  </li>
-
-  <li>
-    <strong>Annotation:</strong>
-    <%= @feature.annotation %>
-  </li>
-
-</ul>
-
-<%= link "Edit", to: feature_path(@conn, :edit, @feature) %>
-<%= link "Back", to: feature_path(@conn, :index) %>
+<p><%= link "All Features", to: feature_path(@conn, :index) %></p>

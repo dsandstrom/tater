@@ -1,3 +1,8 @@
+.feature-mapping {
+  color: $color-accent-light;
+  font-size: .85em;
+}
+
 .feature {
   margin-bottom: 2rem;
   padding: 2rem;
@@ -24,11 +29,6 @@
   .feature-name {
     margin-right: 1rem;
     margin-bottom: 0;
-  }
-
-  .feature-mapping {
-    color: $color-accent-light;
-    font-size: .85em;
   }
 }
 
