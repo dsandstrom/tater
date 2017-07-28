@@ -24,7 +24,7 @@
         </div>
       </main>
 
-      <footer class="page-footer"></footer>
+      <%= render Tater.SharedView, "footer.html", assigns %>
     </div>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>

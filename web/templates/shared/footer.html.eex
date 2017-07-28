@@ -1,0 +1,9 @@
+<footer class="page-footer">
+  <div class="page">
+    &copy; 1995-<%= DateTime.utc_now.year %>
+    Einstein Industries, Inc. |
+    <%= link "Policies and Disclaimers",
+             to: "https://www.einsteinindustries.com/html/policies.html",
+             target: "_blank" %>
+  </div>
+</footer>

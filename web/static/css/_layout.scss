@@ -2,10 +2,14 @@ body {
   background: $color-initial;
 }
 
-.page {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 4%;
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-content {
+  flex-grow: 1;
 }
 
 .page-header {
@@ -30,6 +34,19 @@ body {
   }
 }
 
+.page-footer {
+  margin-top: 3rem;
+  padding: 1.5rem 0;
+  background: $lighter-gray;
+  text-align: center;
+}
+
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 4%;
+}
+
 .content-header {
   margin-bottom: 2rem;
 
@@ -49,7 +66,7 @@ body {
   margin-bottom: 2rem;
   padding: 1rem;
   border-left: 3px solid $color-primary;
-  background: $light-gray;
+  background: $lighter-gray;
 
   p:first-child {
     font-weight: bold;
