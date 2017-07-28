@@ -1,4 +1,28 @@
+// scss-lint:disable QualifyingElement
+input[type='email'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='tel'],
+input[type='text'],
+input[type='url'],
+textarea,
+select {
+  border-radius: $theme-border-radius;
+  background: $white;
+}
+
+button,
+input[type='button'],
+input[type='reset'],
+input[type='submit'],
+.button {
+  border-radius: $theme-border-radius;
+}
+// scss-lint:enable QualifyingElement
+
 .form-group {
+  position: relative;
   margin-bottom: 1.5rem;
 
   input {
@@ -7,8 +31,16 @@
 
   .help-block {
     display: block;
-    padding: .5rem 1rem;
-    background: $color-tertiary;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: .6rem 1rem;
     color: $color-failure;
+  }
+
+  &.has-error {
+    label {
+      color: $color-failure;
+    }
   }
 }
