@@ -1,11 +1,16 @@
 defmodule Tater.FeatureController do
+  @moduledoc """
+  Feature controller
+  """
+
   use Tater.Web, :controller
 
   alias Tater.Feature
 
   def index(conn, _params) do
-    # TODO: order by created_at
-    features = Repo.all(Feature)
+    # TODO: add pagination
+    query = from f in Feature, order_by: [desc: f.updated_at]
+    features = Repo.all(query)
     render(conn, "index.html", features: features)
   end
 
