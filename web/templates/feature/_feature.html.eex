@@ -13,9 +13,11 @@
   </article>
 
   <footer class="feature-links">
-    <%= link "Edit", to: feature_path(@conn, :edit, @feature) %>
+    <%= link "Edit", to: feature_path(@conn, :edit, @feature),
+                     class: "button button-outline" %>
     <%= link "Delete", to: feature_path(@conn, :delete, @feature),
                        method: :delete,
+                       class: "button button-outline",
                        data: [confirm: confirm] %>
   </footer>
 </div>

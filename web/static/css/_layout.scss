@@ -78,7 +78,7 @@ body {
 
   &.alert-error,
   &.alert-danger {
-    border-color: $color-failure;
+    border-color: $color-warning;
   }
 
   &.alert-info {

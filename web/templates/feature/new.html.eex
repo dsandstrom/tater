@@ -3,4 +3,4 @@
 <%= render "form.html", changeset: @changeset,
                         action: feature_path(@conn, :create) %>
 
-<%= link "Back", to: feature_path(@conn, :index) %>
+<p><%= link "Back", to: feature_path(@conn, :index) %></p>

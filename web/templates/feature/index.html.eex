@@ -1,6 +1,7 @@
 <header class="content-header">
   <h2>Features</h2>
-  <%= link "New feature", to: feature_path(@conn, :new), class: "button" %>
+  <%= link "New feature", to: feature_path(@conn, :new),
+                          class: "button button-success" %>
 </header>
 
 <%= render_features @features, assigns %>

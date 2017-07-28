@@ -35,12 +35,41 @@ input[type='submit'],
     right: 0;
     bottom: 0;
     padding: .6rem 1rem;
-    color: $color-failure;
+    color: $color-warning;
   }
 
   &.has-error {
     label {
-      color: $color-failure;
+      color: $color-warning;
+    }
+  }
+}
+
+.button-success {
+  border-color: $color-success;
+  background-color: $color-success;
+
+  &:hover {
+    border-color: $color-success-hover;
+    background-color: $color-success-hover;
+  }
+}
+
+form {
+  // destroy link
+  &.link {
+    margin-bottom: 1rem;
+
+    .button {
+      margin-bottom: 0;
+      border-color: $color-warning;
+      color: $color-warning;
+
+      &:hover,
+      &:active {
+        border-color: $color-warning-hover;
+        color: $color-warning-hover;
+      }
     }
   }
 }

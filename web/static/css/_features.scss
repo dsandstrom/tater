@@ -5,16 +5,39 @@
   background: $white;
 
   header {
+    margin-bottom: 1rem;
+  }
+
+  footer {
     display: flex;
-    align-items: baseline;
+
+    a:first-child {
+      margin-right: 1rem;
+    }
+
+    .button,
+    form {
+      margin-bottom: 0;
+    }
   }
 
   .feature-name {
     margin-right: 1rem;
+    margin-bottom: 0;
   }
 
   .feature-mapping {
+    color: $color-accent-light;
     font-size: .85em;
-    color: $color-quinary;
+  }
+}
+
+@include breakpoint(medium up) {
+  .feature {
+    header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
   }
 }

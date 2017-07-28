@@ -25,7 +25,9 @@ $color-quaternary: $light-gray;
 $color-quinary: $lighter-gray;
 
 $color-success: $green;
-$color-failure: $orange;
+$color-warning: $orange;
+$color-success-hover: darken($color-success, 8%);
+$color-warning-hover: darken($color-warning, 8%);
 
 // theme variables
 $theme-border-radius: 3px;
