@@ -1,3 +1,7 @@
+body {
+  background: $color-initial;
+}
+
 .page {
   max-width: 1000px;
   margin: 0 auto;
@@ -5,7 +9,14 @@
 }
 
 .page-header {
-  padding-top: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem 0;
+  background: $color-dark;
+  color: $color-initial;
+
+  h1 {
+    margin-bottom: 0;
+  }
 }
 
 .content-header {
@@ -27,7 +38,7 @@
   margin-bottom: 2rem;
   padding: 1rem;
   border-left: 3px solid $color-primary;
-  background: $color-tertiary;
+  background: $light-gray;
 
   p:first-child {
     font-weight: bold;
