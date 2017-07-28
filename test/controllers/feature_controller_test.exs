@@ -50,7 +50,7 @@ defmodule Tater.FeatureControllerTest do
        %{conn: conn} do
     feature = Repo.insert! %Feature{}
     conn = put conn, feature_path(conn, :update, feature), feature: @valid_attrs
-    assert redirected_to(conn) == feature_path(conn, :show, feature)
+    assert redirected_to(conn) == feature_path(conn, :index)
     assert Repo.get_by(Feature, @valid_attrs)
   end
 

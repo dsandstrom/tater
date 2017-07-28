@@ -51,7 +51,7 @@ defmodule Tater.FeatureController do
       {:ok, feature} ->
         conn
         |> put_flash(:info, "Feature updated successfully.")
-        |> redirect(to: feature_path(conn, :show, feature))
+        |> redirect(to: feature_path(conn, :index))
       {:error, changeset} ->
         render(conn, "edit.html", feature: feature, changeset: changeset)
     end
