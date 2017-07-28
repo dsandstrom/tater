@@ -4,6 +4,7 @@ defmodule Tater.FeatureController do
   alias Tater.Feature
 
   def index(conn, _params) do
+    # TODO: order by created_at
     features = Repo.all(Feature)
     render(conn, "index.html", features: features)
   end
