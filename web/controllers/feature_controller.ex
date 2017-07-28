@@ -7,11 +7,15 @@ defmodule Tater.FeatureController do
 
   alias Tater.Feature
 
-  def index(conn, _params) do
-    # TODO: add pagination
-    query = from f in Feature, order_by: [desc: f.updated_at]
-    features = Repo.all(query)
-    render(conn, "index.html", features: features)
+  def index(conn, params) do
+    page =
+      Feature
+      |> order_by(desc: :updated_at)
+      |> Repo.paginate(params)
+
+    render conn, "index.html",
+      page: page,
+      features: page.entries
   end
 
   def new(conn, _params) do

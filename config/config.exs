@@ -22,6 +22,9 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :scrivener_html,
+  view_style: :semantic
+
 if Mix.env == :dev do
   # clear console before each test run
   config :mix_test_watch, clear: true

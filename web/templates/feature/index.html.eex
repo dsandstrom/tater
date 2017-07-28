@@ -4,4 +4,8 @@
                           class: "button button-success" %>
 </header>
 
+<%= pagination_links @page %>
+
 <%= render_features @features, assigns %>
+
+<%= pagination_links @page %>

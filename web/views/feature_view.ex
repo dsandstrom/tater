@@ -4,8 +4,10 @@ defmodule Tater.FeatureView do
   """
 
   use Tater.Web, :view
+  import Scrivener.HTML
 
-  def render_features(_f = [], _a), do: content_tag(:p, "None yet")
+  def render_features(_f = [], _a), do: render_none()
+  def render_features(_f = %Scrivener.Page{entries: []}, _a), do: render_none()
   # TODO: pass `feature` variable to partial
   # get compilation error saying undefined feature
   def render_features(features, assigns) do
@@ -16,4 +18,6 @@ defmodule Tater.FeatureView do
       end
     end
   end
+
+  defp render_none, do: content_tag(:p, "None yet")
 end
