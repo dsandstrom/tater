@@ -9,3 +9,4 @@
 <%= render_features @features, assigns %>
 
 <%= pagination_links @page %>
+<%= pagination_info @page, "Features" %>

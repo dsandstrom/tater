@@ -4,5 +4,5 @@ defmodule Tater.Repo do
   """
 
   use Ecto.Repo, otp_app: :tater
-  use Scrivener
+  use Scrivener, page_size: 10
 end
