@@ -28,13 +28,10 @@ defmodule Tater.Feature do
   end
 
   # no mapping
-  defp auto_map(%Ecto.Changeset{changes: %{name: name, mapping: nil}} = changeset),
+  defp auto_map(%Ecto.Changeset{changes: %{name: name, mapping: nil}} = changeset) when name !== nil,
     do: changeset |> put_change(:mapping, first_available_mapping(name))
   # mapping is being manually set
   defp auto_map(%Ecto.Changeset{changes: %{name: _, mapping: _}} = changeset),
-    do: changeset
-  # trying to change name to nil
-  defp auto_map(%Ecto.Changeset{changes: %{name: nil}} = changeset),
     do: changeset
   # trying to set mapping to nil
   defp auto_map(%Ecto.Changeset{changes: %{mapping: nil}, data: %{name: name, mapping: original_mapping}} = changeset) do
