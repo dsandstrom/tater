@@ -8,8 +8,6 @@ defmodule Tater.FeatureView do
 
   def render_features(_f = [], _a), do: render_none()
   def render_features(_f = %Scrivener.Page{entries: []}, _a), do: render_none()
-  # TODO: pass `feature` variable to partial
-  # get compilation error saying undefined feature
   def render_features(features, assigns) do
     content_tag :div, id: "features", class: "features" do
       for feature <- features do
