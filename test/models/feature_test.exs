@@ -126,5 +126,12 @@ defmodule Tater.FeatureTest do
       changeset = Feature.changeset(feature, attrs)
       assert fetch_field(changeset, :mapping) == {:data, "hero"}
     end
+
+    test "when editing, doesn't change mapping when changing name" do
+      feature = Repo.insert! %Feature{name: "Hero", mapping: "hero"}
+      attrs = %{name: "New Name"}
+      changeset = Feature.changeset(feature, attrs)
+      assert fetch_field(changeset, :mapping) == {:data, "hero"}
+    end
   end
 end

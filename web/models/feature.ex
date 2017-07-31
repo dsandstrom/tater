@@ -27,7 +27,6 @@ defmodule Tater.Feature do
     |> unique_constraint(:mapping)
   end
 
-  # TODO: don't change mapping after changing name
   # no mapping
   defp auto_map(%Ecto.Changeset{changes: %{name: name, mapping: nil}} = changeset),
     do: changeset |> put_change(:mapping, first_available_mapping(name))
@@ -46,8 +45,8 @@ defmodule Tater.Feature do
       changeset |> put_change(:mapping, first_available_mapping(name))
     end
   end
-  # no mapping
-  defp auto_map(%Ecto.Changeset{changes: %{name: name}} = changeset),
+  # update a feature with no mapping
+  defp auto_map(%Ecto.Changeset{changes: %{name: name}, data: %{mapping: nil}} = changeset),
     do: changeset |> put_change(:mapping, first_available_mapping(name))
   # no changes
   defp auto_map(changeset),
