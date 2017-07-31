@@ -48,6 +48,9 @@ defmodule Tater.Feature do
   # update a feature with no mapping
   defp auto_map(%Ecto.Changeset{changes: %{name: name}, data: %{mapping: nil}} = changeset),
     do: changeset |> put_change(:mapping, first_available_mapping(name))
+  # update a feature with no mapping
+  defp auto_map(%Ecto.Changeset{changes: %{}, data: %{name: name, mapping: nil}} = changeset) when name != nil,
+    do: changeset |> put_change(:mapping, first_available_mapping(name))
   # no changes
   defp auto_map(changeset),
     do: changeset
@@ -71,7 +74,7 @@ defmodule Tater.Feature do
   end
 
   defp mapping_option(name, index), do: "#{mapping_option(name)}-#{index}"
-  defp mapping_option(name) do
+  defp mapping_option(name) when is_bitstring(name) do
     name
     |> String.trim
     |> String.downcase

@@ -133,5 +133,17 @@ defmodule Tater.FeatureTest do
       changeset = Feature.changeset(feature, attrs)
       assert fetch_field(changeset, :mapping) == {:data, "hero"}
     end
+
+    test "when editing feature without a mapping, auto maps" do
+      feature = Repo.insert! %Feature{name: "Hero"}
+      attrs = %{}
+      changeset = Feature.changeset(feature, attrs)
+      assert fetch_field(changeset, :mapping) == {:changes, "hero"}
+    end
+
+    test "doesn't break when name is nil" do
+      changeset = Feature.changeset(%Feature{}, %{name: nil})
+      assert fetch_field(changeset, :mapping) == {:data, nil}
+    end
   end
 end
