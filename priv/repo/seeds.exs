@@ -1,11 +1,18 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     Tater.Repo.insert!(%Tater.SomeModel{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+defmodule Tater.DatabaseSeeder do
+  alias Tater.Repo
+  alias Tater.Feature
+
+  def insert_features(0), do: {:ok}
+  def insert_features(count \\ 20) do
+    insert_feature()
+    insert_features(count - 1)
+  end
+
+  def insert_feature(name \\ Faker.App.name) do
+    params = %{name: name, annotation: Faker.Lorem.paragraph}
+    changeset = Feature.changeset(%Feature{}, params)
+    Repo.insert changeset
+  end
+end
+
+Tater.DatabaseSeeder.insert_features()
