@@ -1,5 +1,8 @@
 defmodule Tater.Feature do
-  @moduledoc "Theme feature that will be annotated"
+  @moduledoc """
+  Theme feature that will be annotated"
+  """
+  # TODO: add seed data
 
   use Tater.Web, :model
 
