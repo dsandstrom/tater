@@ -4,9 +4,10 @@
                           class: "button button-success" %>
 </header>
 
-<%= pagination_links @page %>
+<%# TODO: use icons for previous/next links %>
+<%= pagination_links @page, previous: "«", next: "»" %>
 
 <%= render_features @features, assigns %>
 
-<%= pagination_links @page %>
+<%= pagination_links @page, previous: "«", next: "»" %>
 <%= pagination_info @page, "Features" %>

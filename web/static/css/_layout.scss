@@ -97,3 +97,38 @@ body {
     border-color: $color-success;
   }
 }
+
+.pagination {
+  display: flex;
+  margin-bottom: 1.5rem;
+
+  a {
+    padding: .2rem 1rem;
+    border: 1px solid $light-gray;
+    border-width: 1px 1px 1px 0;
+    font-size: .85em;
+
+    &:first-child {
+      border-width: 1px;
+      border-top-left-radius: $theme-border-radius;
+      border-bottom-left-radius: $theme-border-radius;
+    }
+
+    &:last-child {
+      border-top-right-radius: $theme-border-radius;
+      border-bottom-right-radius: $theme-border-radius;
+    }
+
+    &:not(.active) {
+      &:hover {
+        background: $lighter-gray;
+      }
+    }
+
+    &.active {
+      background: $light-gray;
+      color: $color-accent-dark;
+      pointer-events: none;
+    }
+  }
+}
