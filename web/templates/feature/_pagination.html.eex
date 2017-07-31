@@ -1,0 +1,9 @@
+<%# TODO: use icons for previous/next links %>
+
+<%= if @page.total_pages != 1 do %>
+  <%= pagination_links @page, previous: "«", next: "»" %>
+<% end %>
+
+<%= if @show_info do %>
+  <%= pagination_info @page, "Features" %>
+<% end %>
