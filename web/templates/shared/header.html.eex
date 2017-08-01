@@ -1,7 +1,11 @@
 <header class="page-header">
   <div class="page">
-    <h1 class="site-heading">
-      <%= link "Theme Annotater", to: feature_path(@conn, :index) %>
-    </h1>
+    <div class="heading-and-form">
+      <h1 class="site-heading">
+        <%= link "Theme Annotater", to: feature_path(@conn, :index) %>
+      </h1>
+
+      <%= render Tater.FeatureView, "_search_form.html", conn: @conn %>
+    </div>
   </div>
 </header>

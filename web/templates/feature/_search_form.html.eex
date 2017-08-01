@@ -1,0 +1,11 @@
+<%= form_for @conn, feature_path(@conn, :index),
+             [as: :search, method: :get, class: "search-form"],
+             fn f -> %>
+  <div class="form-group">
+    <%= text_input f, :q, placeholder: "Search by name" %>
+    <%# TODO: use magnifying glass icon %>
+    <%= submit "Q", class: "button button-secondary" %>
+  </div>
+
+  <p><%= link "reset", to: feature_path(@conn, :index) %></p>
+<% end %>
