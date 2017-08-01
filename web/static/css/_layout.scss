@@ -49,6 +49,11 @@ body {
 
 .content-header {
   margin-bottom: 2rem;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 1.3rem;
+  }
 
   .heading-wrapper {
     margin-bottom: 1rem;
@@ -67,6 +72,7 @@ body {
     flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-between;
+    text-align: left;
 
     h2 {
       margin: 0 2rem 1rem 0;
@@ -101,7 +107,12 @@ body {
 
 .pagination {
   display: flex;
+  justify-content: center;
   margin-bottom: 2rem;
+
+  @include breakpoint(medium up) {
+    justify-content: flex-start;
+  }
 
   a {
     padding: .2rem 1rem;
@@ -132,5 +143,13 @@ body {
       box-shadow: inset 0 0 8px rgba($black, .1);
       pointer-events: none;
     }
+  }
+}
+
+.pagination-info {
+  text-align: center;
+
+  @include breakpoint(medium up) {
+    text-align: left;
   }
 }
