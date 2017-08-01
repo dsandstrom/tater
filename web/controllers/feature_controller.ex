@@ -10,6 +10,7 @@ defmodule Tater.FeatureController do
   def index(conn, params) do
     page =
       Feature
+      |> Feature.search_for(params["search"]["q"])
       |> order_by(desc: :updated_at)
       |> Repo.paginate(params)
 

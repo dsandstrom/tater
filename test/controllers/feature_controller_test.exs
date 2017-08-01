@@ -11,6 +11,11 @@ defmodule Tater.FeatureControllerTest do
     assert html_response(conn, 200) =~ "Features"
   end
 
+  test "lists all entries on index when searching", %{conn: conn} do
+    conn = get conn, feature_path(conn, :index), %{"search" => %{"q" => "term"}}
+    assert html_response(conn, 200) =~ "Features"
+  end
+
   test "renders form for new resources", %{conn: conn} do
     conn = get conn, feature_path(conn, :new)
     assert html_response(conn, 200) =~ "New Feature"
