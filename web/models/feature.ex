@@ -4,6 +4,7 @@ defmodule Tater.Feature do
   """
 
   use Tater.Web, :model
+  use Phoenix.HTML.SimplifiedHelpers
 
   schema "features" do
     field :name, :string
@@ -76,6 +77,7 @@ defmodule Tater.Feature do
     |> String.trim
     |> String.downcase
     |> String.replace(~r/\s+/, "-")
+    |> truncate(length: 20, omission: "")
   end
 
   defp mapping_is_available(mapping) do

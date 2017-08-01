@@ -145,5 +145,12 @@ defmodule Tater.FeatureTest do
       changeset = Feature.changeset(%Feature{}, %{name: nil})
       assert fetch_field(changeset, :mapping) == {:data, nil}
     end
+
+    test "generates one shorter than 20 characters" do
+      name = "Really Long Name That Should Get Truncated"
+      mapping = "really-long-name-tha"
+      changeset = Feature.changeset(%Feature{}, %{name: name})
+      assert fetch_field(changeset, :mapping) == {:changes, mapping}
+    end
   end
 end
