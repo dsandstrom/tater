@@ -18,13 +18,14 @@ $light-gray: lighten($gray, 30%);
 $lighter-gray: lighten($gray, 40%);
 $black: #000;
 
-
 $color-initial: $color-light;
 $color-primary: $color-brand;
 $color-secondary: $color-accent-dark;
 $color-tertiary: $color-accent-light;
 $color-quaternary: $light-gray;
 $color-quinary: $lighter-gray;
+
+$color-primary-dark: darken($color-primary, 10%);
 
 $color-success: $green;
 $color-warning: $orange;
