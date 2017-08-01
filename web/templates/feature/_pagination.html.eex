@@ -1,7 +1,6 @@
-<%# TODO: use icons for previous/next links %>
-
 <%= if @page.total_pages != 1 do %>
-  <%= pagination_links @page, previous: "«", next: "»" %>
+  <%= pagination_links @page, previous: ~E"<i class='icon-chevron-left'></i>",
+                              next: ~E"<i class='icon-chevron-right'></i>" %>
 <% end %>
 
 <%= if @show_info do %>
