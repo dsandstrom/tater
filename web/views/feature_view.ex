@@ -20,7 +20,6 @@ defmodule Tater.FeatureView do
   defp render_none, do: content_tag(:p, "None yet")
 
   def pagination_info(page, type) do
-    page_size = page.page_size
     total_entries = page.total_entries
 
     first_index = find_first_index(page)
