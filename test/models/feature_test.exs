@@ -153,4 +153,27 @@ defmodule Tater.FeatureTest do
       assert fetch_field(changeset, :mapping) == {:changes, mapping}
     end
   end
+
+  describe ".search_for" do
+    test "returns features with matching name" do
+      feature = Repo.insert! %Feature{name: "alpha"}
+      Repo.insert! %Feature{name: "beta"}
+      features = Feature |> Feature.search_for("alpha") |> Repo.all
+      assert features == [feature]
+    end
+
+    test "returns features with similar name" do
+      feature = Repo.insert! %Feature{name: "alpha"}
+      Repo.insert! %Feature{name: "beta"}
+      features = Feature |> Feature.search_for("alp") |> Repo.all
+      assert features == [feature]
+    end
+
+    test "returns features with case insensitive name" do
+      feature = Repo.insert! %Feature{name: "AlPhA"}
+      Repo.insert! %Feature{name: "beta"}
+      features = Feature |> Feature.search_for("alp") |> Repo.all
+      assert features == [feature]
+    end
+  end
 end
