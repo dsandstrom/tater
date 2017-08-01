@@ -19,7 +19,8 @@ defmodule Tater.Mixfile do
   def application do
     [mod: {Tater, []}, applications:
       [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-       :phoenix_ecto, :postgrex, :scrivener_ecto, :scrivener_html]]
+       :phoenix_ecto, :postgrex, :scrivener_ecto, :scrivener_html,
+       :phoenix_html_simplified_helpers]]
   end
 
   # Specifies which paths to compile per environment.
@@ -43,7 +44,8 @@ defmodule Tater.Mixfile do
      {:dogma, "~> 0.1", only: :dev},
      {:scrivener_ecto, "~> 1.0"},
      {:scrivener_html, "~> 1.7"},
-     {:faker, "~> 0.8", only: :dev}]
+     {:faker, "~> 0.8", only: :dev},
+     {:phoenix_html_simplified_helpers, "~> 1.2"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
