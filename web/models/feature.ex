@@ -8,6 +8,9 @@ defmodule Tater.Feature do
   use Tater.Web, :model
   use Phoenix.HTML.SimplifiedHelpers
 
+  alias Tater.Repo
+  alias Tater.Feature
+
   schema "features" do
     field :name, :string
     field :mapping, :string
@@ -83,7 +86,7 @@ defmodule Tater.Feature do
   end
 
   defp mapping_is_available(mapping) do
-    query = from f in Tater.Feature, where: f.mapping == ^mapping
-    length(Tater.Repo.all(query)) == 0
+    query = from f in Feature, where: f.mapping == ^mapping
+    length(Repo.all(query)) == 0
   end
 end
