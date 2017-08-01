@@ -74,9 +74,10 @@
 
 [class^='icon-chevron'],
 [class*=' icon-chevron'] {
+  font-size: .85em;
+
   &::before {
     position: relative;
     top: .05em;
-    font-size: .85em;
   }
 }

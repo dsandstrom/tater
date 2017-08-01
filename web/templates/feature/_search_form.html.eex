@@ -3,8 +3,10 @@
              fn f -> %>
   <div class="form-group">
     <%= text_input f, :q, placeholder: "Search by name" %>
-    <%# TODO: use magnifying glass icon %>
-    <%= submit "Q", class: "button button-secondary" %>
+
+    <%= submit class: "button button-secondary" do %>
+      <i class="icon-search"></i>
+    <% end %>
   </div>
 
   <p><%= link "reset", to: feature_path(@conn, :index) %></p>

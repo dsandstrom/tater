@@ -137,36 +137,3 @@ form {
 ::placeholder {
   color: $light-gray;
 }
-
-.search-form {
-  .form-group {
-    display: flex;
-    margin-bottom: .5rem;
-
-    [type="text"] {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    button {
-      margin-bottom: 0;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-  }
-
-  p {
-    margin-bottom: 0;
-    font-size: .85em;
-    text-align: right;
-  }
-
-  a {
-    color: $color-secondary;
-
-    &:focus,
-    &:hover {
-      color: $color-secondary-dark;
-    }
-  }
-}
