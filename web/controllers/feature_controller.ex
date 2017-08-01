@@ -52,7 +52,7 @@ defmodule Tater.FeatureController do
     changeset = Feature.changeset(feature, feature_params)
 
     case Repo.update(changeset) do
-      {:ok, feature} ->
+      {:ok, _feature} ->
         conn
         |> put_flash(:info, "Feature updated successfully.")
         |> redirect(to: feature_path(conn, :index))
