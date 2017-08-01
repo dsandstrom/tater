@@ -49,6 +49,20 @@ input[type='submit'].button-outline {
   }
 }
 
+.button,
+button {
+  &.button-secondary {
+    border-color: $color-secondary;
+    background-color: $color-secondary;
+
+    &:focus,
+    &:hover {
+      border-color: $color-secondary-dark;
+      background-color: $color-secondary-dark;
+    }
+  }
+}
+
 a {
   &:focus,
   &:hover {
@@ -93,6 +107,7 @@ a {
   border-color: $color-success;
   background-color: $color-success;
 
+  &:focus,
   &:hover {
     border-color: $color-success-hover;
     background-color: $color-success-hover;
@@ -109,6 +124,7 @@ form {
       border-color: $color-warning;
       color: $color-warning;
 
+      &:focus,
       &:hover,
       &:active {
         border-color: $color-warning-hover;

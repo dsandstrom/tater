@@ -16,6 +16,7 @@ $white: #fff;
 $gray: $color-accent-dark;
 $light-gray: lighten($gray, 30%);
 $lighter-gray: lighten($gray, 40%);
+$medium-gray: darken($gray, 6%);
 $black: #000;
 
 $color-initial: $color-light;
@@ -26,6 +27,7 @@ $color-quaternary: $light-gray;
 $color-quinary: $lighter-gray;
 
 $color-primary-dark: darken($color-primary, 10%);
+$color-secondary-dark: $medium-gray;
 
 $color-success: $green;
 $color-warning: $orange;
