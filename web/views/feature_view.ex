@@ -17,7 +17,7 @@ defmodule Tater.FeatureView do
     end
   end
 
-  defp render_none, do: content_tag(:p, "None yet")
+  defp render_none, do: content_tag(:p, "None found")
 
   def pagination_info(page, type) do
     total_entries = page.total_entries
