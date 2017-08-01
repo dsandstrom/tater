@@ -175,5 +175,19 @@ defmodule Tater.FeatureTest do
       features = Feature |> Feature.search_for("alp") |> Repo.all
       assert features == [feature]
     end
+
+    test "returns all features when no search term" do
+      feature_0 = Repo.insert! %Feature{name: "alpha"}
+      feature_1 = Repo.insert! %Feature{name: "beta"}
+      features = Feature |> Feature.search_for() |> Repo.all
+      assert features == [feature_0, feature_1]
+    end
+
+    test "returns all features when blank search term" do
+      feature_0 = Repo.insert! %Feature{name: "alpha"}
+      feature_1 = Repo.insert! %Feature{name: "beta"}
+      features = Feature |> Feature.search_for("") |> Repo.all
+      assert features == [feature_0, feature_1]
+    end
   end
 end

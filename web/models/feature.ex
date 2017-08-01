@@ -90,6 +90,8 @@ defmodule Tater.Feature do
     length(Repo.all(query)) == 0
   end
 
+  def search_for(query), do: query
+  def search_for(query, _ = ""), do: query
   def search_for(query, term) do
     from f in query, where: ilike(f.name, ^"%#{term}%")
   end
