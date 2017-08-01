@@ -3,12 +3,14 @@
   font-size: .85em;
 }
 
-.feature {
+.features {
   margin-bottom: 2rem;
-  padding: 2rem;
-  border: 1px solid $light-gray;
+  border: 1px solid $lighter-gray;
   border-radius: $theme-border-radius;
-  background: $lighter-gray;
+}
+
+.feature {
+  padding: 2rem 2rem 2.5rem;
 
   header {
     margin-bottom: 1rem;
@@ -30,6 +32,10 @@
   .feature-name {
     margin-right: 1rem;
     margin-bottom: 0;
+  }
+
+  &:nth-child(even) {
+    background: $lighter-gray;
   }
 }
 
