@@ -86,3 +86,7 @@ form {
     }
   }
 }
+
+::placeholder {
+  color: $light-gray;
+}
