@@ -2,7 +2,6 @@ defmodule Tater.Feature do
   @moduledoc """
   Theme feature that will be annotated"
   """
-  # TODO: add search support
   # TODO: add api
 
   use Tater.Web, :model
