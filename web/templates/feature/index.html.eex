@@ -6,6 +6,6 @@
 
 <%= render "_pagination.html", page: @page, show_info: false %>
 
-<%= render_features @features, assigns %>
+<%= render_features @features, @conn %>
 
 <%= render "_pagination.html", page: @page, show_info: true %>

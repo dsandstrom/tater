@@ -8,11 +8,10 @@ defmodule Tater.FeatureView do
 
   def render_features(_f = [], _a), do: render_none()
   def render_features(_f = %Scrivener.Page{entries: []}, _a), do: render_none()
-  def render_features(features, assigns) do
+  def render_features(features, conn) do
     content_tag :div, id: "features", class: "features" do
       for feature <- features do
-        assigns = Map.put_new(assigns, :feature, feature)
-        render "_feature.html", assigns
+        render "_feature.html", conn: conn, feature: feature
       end
     end
   end
