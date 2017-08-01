@@ -1,0 +1,82 @@
+@charset 'UTF-8';
+
+// scss-lint:disable ImportantRule
+
+@font-face {
+  font-family: 'tater';
+  src: url('/fonts/tater.eot');
+  src: url('/fonts/tater.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/tater.woff') format('woff'),
+    url('/fonts/tater.ttf') format('truetype'),
+    url('/fonts/tater.svg#tater') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]::before {
+  font-family: 'tater' !important;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal !important;
+  font-variant: normal !important;
+  font-weight: normal !important;
+  line-height: 1;
+  text-transform: none !important;
+  content: attr(data-icon);
+  speak: none;
+}
+
+[class^='icon-']::before,
+[class*=' icon-']::before {
+  font-family: 'tater' !important;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal !important;
+  font-variant: normal !important;
+  font-weight: normal !important;
+  line-height: 1;
+  text-transform: none !important;
+  speak: none;
+}
+
+.icon-arrow-right::before {
+  content: '\e000';
+}
+
+.icon-arrow-left::before {
+  content: '\e001';
+}
+
+.icon-search::before {
+  content: '\e002';
+}
+
+.icon-refresh::before {
+  content: '\e003';
+}
+
+.icon-chevron-left::before {
+  content: '\e004';
+}
+
+.icon-chevron-right::before {
+  content: '\e005';
+}
+
+[class^='icon-arrow'],
+[class*=' icon-arrow'] {
+  &::before {
+    position: relative;
+    top: .15em;
+  }
+}
+
+[class^='icon-chevron'],
+[class*=' icon-chevron'] {
+  &::before {
+    position: relative;
+    top: .05em;
+    font-size: .85em;
+  }
+}
