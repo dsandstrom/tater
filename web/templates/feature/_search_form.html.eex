@@ -4,7 +4,7 @@
   <div class="form-group">
     <%= text_input f, :q, placeholder: "Search by name" %>
 
-    <%= submit class: "button button-secondary" do %>
+    <%= submit class: "button" do %>
       <i class="icon-search"></i>
     <% end %>
   </div>
