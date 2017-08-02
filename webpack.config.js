@@ -1,11 +1,11 @@
 const path = require('path');
-var CopyWebpackPlugin = require("copy-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  entry: "./web/static/js/app.js",
+  entry: ["./web/static/js/app.js", "./web/static/css/app.scss"],
   output: {
-    path: path.resolve(__dirname, "priv/static/js"),
-    filename: "app.js"
+    path: path.resolve(__dirname, "priv/static"),
+    filename: "js/app.js"
   },
 
   resolve: {
@@ -24,6 +24,19 @@ module.exports = {
       query: {
         presets: ["es2015"]
       }
+    }],
+    rules: [{
+      test: /\.scss$/,
+      use: [{
+        loader: "style-loader" // creates style nodes from JS strings
+      }, {
+        loader: "css-loader" // translates CSS into CommonJS
+      }, {
+        loader: "sass-loader", // compiles Sass to CSS
+        options: {
+          includePaths: ["node_modules"]
+        }
+      }]
     }]
   }
 };
