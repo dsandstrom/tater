@@ -50,6 +50,9 @@
 }
 
 .search-form {
+  max-width: 300px;
+  margin: 0 auto;
+
   [type="text"],
   button {
     height: 3.2rem;
@@ -109,5 +112,11 @@
   .form-group {
     display: flex;
     margin-bottom: .5rem;
+  }
+}
+
+@include breakpoint(large up) {
+  .search-form {
+    margin: 0;
   }
 }
