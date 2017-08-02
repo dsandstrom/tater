@@ -11,6 +11,6 @@
 
   <div class="form-group button-form-group">
     <p><small>*All fields required</small></p>
-    <%= submit "Submit", class: "button button-success" %>
+    <%= submit "Save", class: "button button-success" %>
   </div>
 <% end %>
