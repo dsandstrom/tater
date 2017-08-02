@@ -47,7 +47,7 @@ body {
   @include breakpoint(large up) {
     .heading-and-form {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       justify-content: space-between;
 
       h1 {

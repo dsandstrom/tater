@@ -7,6 +7,9 @@ $color-brand: #928370;
 $color-accent-dark: #7b7a7c;
 $color-dark: #1e202e;
 
+// header input bg
+$color-darker: darken($color-dark, 5%);
+
 $green: #61a25a;
 $orange: #de9222;
 $red: #f44336;
@@ -20,6 +23,7 @@ $medium-gray: darken($gray, 6%);
 $dark-gray: darken($gray, 18%);
 $black: #000;
 
+// milligram
 $color-initial: $color-light;
 $color-primary: $color-brand;
 $color-secondary: $color-accent-dark;

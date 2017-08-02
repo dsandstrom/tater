@@ -53,18 +53,10 @@
   max-width: 300px;
   margin: 0 auto;
 
-  [type="text"],
-  button {
-    height: 3.2rem;
-    line-height: 3.2rem;
-  }
-
   [type="text"] {
-    padding: 0 4rem 0 .5rem;
-    border: 1px dashed $medium-gray;
-    border-width: 0 0 1px;
-    border-radius: 0;
-    background: transparent;
+    padding: 0 4rem 0 1rem;
+    border-color: $color-darker;
+    background: $color-darker;
     color: $light-gray;
   }
 
@@ -73,14 +65,15 @@
     top: 0;
     right: 0;
     margin-bottom: 0;
-    padding: 0 .5rem;
-    border-width: 0;
+    padding: 0 1rem;
+    border-color: transparent;
     background-color: transparent;
     color: $color-primary;
 
     &:focus,
     &:hover,
     &:active {
+      border-color: transparent;
       background-color: transparent;
       color: $color-primary-dark;
     }
@@ -102,7 +95,12 @@
   }
 
   i {
-    font-size: 1.5em;
+    font-size: 2em;
+
+    &::before {
+      position: relative;
+      top: .1em;
+    }
   }
 
   ::placeholder {
