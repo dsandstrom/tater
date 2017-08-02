@@ -6,6 +6,11 @@ module.exports = {
     path: path.resolve(__dirname, "priv/static/js"),
     filename: "app.js"
   },
+
+  resolve: {
+    modules: [ "node_modules", __dirname + "/web/static/js" ]
+  },
+
   module: {
     loaders: [{
       test: /\.js$/,
