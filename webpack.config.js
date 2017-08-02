@@ -1,7 +1,9 @@
+const path = require('path');
+
 module.exports = {
-  entry: "/Users/dsandstrom/Projects/elixir/tater/web/static/js/app.js",
+  entry: "./web/static/js/app.js",
   output: {
-    path: "/Users/dsandstrom/Projects/elixir/tater/priv/static/js",
+    path: path.resolve(__dirname, "priv/static/js"),
     filename: "app.js"
   },
   module: {
