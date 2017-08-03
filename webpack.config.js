@@ -3,7 +3,8 @@
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 var env = process.env.MIX_ENV || 'dev'
 var isProduction = (env === 'prod')
@@ -13,7 +14,6 @@ var plugins = [
   new CopyWebpackPlugin([{from: "./web/static/assets"}]),
 ];
 
-// TODO: add minifier
 if (isProduction) {
   plugins.push(
     new UglifyJSPlugin({
@@ -24,6 +24,12 @@ if (isProduction) {
           beautify: false,
         }
       }
+    }),
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.css$/g,
+      cssProcessor: require('cssnano'),
+      cssProcessorOptions: { discardComments: {removeAll: true } },
+      canPrint: true
     })
   );
 }
