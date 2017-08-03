@@ -3,15 +3,26 @@
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 // var isProduction = (env === 'prod')
 
 var plugins = [
   new ExtractTextPlugin("css/app.css"),
-  new CopyWebpackPlugin([{from: "./web/static/assets"}])
+  new CopyWebpackPlugin([{from: "./web/static/assets"}]),
+  new UglifyJSPlugin({
+    sourceMap: true,
+    uglifyOptions: {
+      output: {
+        comments: false,
+        beautify: false,
+      }
+    }
+  })
 ];
 
-// TODO: add uglifier
+// TODO: only run uglifier for production
+// TODO: add minifier
 // if (isProduction) {
 //   plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true}))
 // }
