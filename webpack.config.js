@@ -6,8 +6,8 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-var env = process.env.MIX_ENV || 'dev'
-var isProduction = (env === 'prod')
+var env = process.env.MIX_ENV || 'dev';
+var isProduction = (env === 'prod');
 
 var plugins = [
   new ExtractTextPlugin("css/app.css"),
@@ -61,10 +61,6 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract("css-loader")
-      },
-      {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
@@ -74,8 +70,12 @@ module.exports = {
               options: {
                  sourceMap: true
               }
-            },
-            {
+            }, {
+              loader: "postcss-loader",
+              options: {
+                 sourceMap: true
+              }
+            }, {
               loader: "sass-loader",
               options: {
                 includePaths: ["node_modules"],
