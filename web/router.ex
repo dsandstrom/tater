@@ -1,4 +1,7 @@
 defmodule Tater.Router do
+  @moduledoc """
+    Routes
+  """
   use Tater.Web, :router
 
   pipeline :browser do
@@ -19,8 +22,12 @@ defmodule Tater.Router do
     get "/", FeatureController, :index
     resources "/features", FeatureController
   end
-  # Other scopes may use custom stacks.
-  # scope "/api", Tater do
-  #   pipe_through :api
-  # end
+
+  scope "/api", Tater do
+    pipe_through :api
+
+    scope "/v1", V1, as: :v1 do
+      resources "/features", FeatureController, only: [:index, :show]
+    end
+  end
 end
