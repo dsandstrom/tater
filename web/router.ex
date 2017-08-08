@@ -2,6 +2,7 @@ defmodule Tater.Router do
   @moduledoc """
     Routes
   """
+
   use Tater.Web, :router
 
   pipeline :browser do
@@ -27,7 +28,8 @@ defmodule Tater.Router do
     pipe_through :api
 
     scope "/v1", V1, as: :v1 do
-      resources "/features", FeatureController, only: [:index, :show]
+      resources "/features", FeatureController, only: [:index, :show],
+                                                param: "mapping"
     end
   end
 end

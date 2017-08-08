@@ -17,9 +17,17 @@ defmodule Tater.V1.FeatureControllerTest do
       feature = Repo.insert!(%Feature{name: "Hero", mapping: "hero",
                                       annotation: "Lorem"})
 
-      conn = get conn, v1_feature_path(conn, :show, feature)
+      conn = get conn, v1_feature_path(conn, :show, feature.mapping)
 
       assert json_response(conn, 200) == %{"data" => attrs}
+    end
+
+    test "returns 404 when resource not found", %{conn: conn} do
+      Repo.insert!(%Feature{name: "Hero", mapping: "hero", annotation: "Lorem"})
+
+      conn = get conn, v1_feature_path(conn, :show, "nope")
+
+      assert json_response(conn, 404) == %{"data" => nil}
     end
   end
 end

@@ -9,6 +9,7 @@ defmodule Tater.V1.FeatureView do
     %{data: render_many(features, __MODULE__, "feature.json")}
   end
 
+  def render("show.json", %{feature: nil}), do: render_not_found()
   def render("show.json", %{feature: feature}) do
     %{data: render_one(feature, __MODULE__, "feature.json")}
   end
@@ -18,4 +19,6 @@ defmodule Tater.V1.FeatureView do
       mapping: feature.mapping,
       annotation: feature.annotation}
   end
+
+  defp render_not_found, do: %{data: nil}
 end

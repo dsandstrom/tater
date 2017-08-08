@@ -7,16 +7,18 @@ defmodule Tater.V1.FeatureController do
 
   alias Tater.Feature
 
-  def index(conn, params) do
+  def index(conn, _) do
     features = Repo.all(Feature)
-    render conn, "index.json",
-      features: features
+    render conn, "index.json", features: features
   end
 
-  def show(conn, %{"id" => id}) do
-    # TODO: add mapping index to db
-    # TODO: find by mapping
-    feature = Repo.get!(Feature, id)
-    render(conn, "show.json", feature: feature)
+  def show(conn, %{"mapping" => mapping}) do
+    feature = Repo.get_by(Feature, mapping: mapping)
+    conn
+    |> put_current_status(feature)
+    |> render("show.json", feature: feature)
   end
+
+  defp put_current_status(conn, nil), do: put_status(conn, 404)
+  defp put_current_status(conn, _), do: conn
 end
