@@ -20,17 +20,7 @@ config :tater, Tater.Endpoint,
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id],
-  backends: [{LoggerFileBackend, :info},
-             {LoggerFileBackend, :error}]
-
-config :logger, :info,
-  path: "var/log/info.log",
-  level: :info
-
-config :logger, :error,
-  path: "var/log/error.log",
-  level: :error
+  metadata: [:request_id]
 
 config :scrivener_html,
   view_style: :semantic

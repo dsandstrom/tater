@@ -56,6 +56,15 @@ config :logger, level: :info
 #     config :tater, Tater.Endpoint, server: true
 #
 
+config :logger,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id],
+  backends: [{LoggerFileBackend, :error}]
+
+config :logger, :error,
+  path: "/http/www/t/tater.einsteinsandbox.com/Tater/shared/log/error.log",
+  level: :debug
+
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
 import_config "prod.secret.exs"
