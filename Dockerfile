@@ -1,11 +1,11 @@
-FROM centos:6
+FROM staticfloat/centos-i386:centos6
 MAINTAINER Darrell Sandstrom
 
 RUN yum update -y && yum clean all
 RUN yum install -y wget && yum clean all
 
 # Install dependencies
-RUN yum install -y gcc gcc-c++ glibc-devel make ncurses-devel openssl-devel autoconf java-1.8.0-openjdk-devel git && yum clean all
+RUN yum install -y gcc gcc-c++ glibc-devel make ncurses-devel openssl-devel autoconf java-1.8.0-openjdk-devel git tar && yum clean all
 
 # Install Erlang
 ENV ERLANG_VERSION 20.0
