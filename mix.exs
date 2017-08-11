@@ -46,7 +46,8 @@ defmodule Tater.Mixfile do
      {:scrivener_html, "~> 1.7"},
      {:faker, "~> 0.8", only: :dev},
      {:phoenix_html_simplified_helpers, "~> 1.2"},
-     {:distillery, "~> 1.4", runtime: false}]
+     {:distillery, "~> 1.4", runtime: false},
+     {:logger_file_backend, "~> 0.0.10"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
