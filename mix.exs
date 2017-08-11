@@ -20,7 +20,7 @@ defmodule Tater.Mixfile do
     [mod: {Tater, []}, applications:
       [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
        :phoenix_ecto, :postgrex, :scrivener_ecto, :scrivener_html,
-       :phoenix_html_simplified_helpers]]
+       :phoenix_html_simplified_helpers, :logger_file_backend]]
   end
 
   # Specifies which paths to compile per environment.
