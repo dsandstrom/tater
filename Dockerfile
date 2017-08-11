@@ -27,15 +27,15 @@ RUN git checkout refs/tags/v${ELIXIR_VERSION}
 RUN make clean install
 RUN export PATH="$PATH:/home/elixir/bin"
 
-# Install Hex
+# Install Hex & Rebar
 RUN mix local.hex --force
-
-# Install Rebar
 RUN mix local.rebar --force
 
 # Install Node.js
-RUN curl --silent --location https://rpm.nodesource.com/setup_7.x | bash -
-RUN yum -y install nodejs
+ENV NODE_VERSION=7.10.1
+WORKDIR /home/node
+RUN wget https://nodejs.org/download/release/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x86.tar.gz
+RUN tar --strip-components 1 -xzvf node-v* -C /usr/local
 
 # Build Phoenix app
 RUN mkdir /home/src
