@@ -1,3 +1,3 @@
 #!/bin/sh
 
-bin/myapp command Elixir.MyApp.ReleaseTasks seed
+bin/tater command Elixir.Tater.ReleaseTasks seed
