@@ -40,9 +40,6 @@ end
 
 release :tater do
   set version: current_version(:tater)
-  set applications: [
-    :runtime_tools
-  ]
   set commands: [
     "migrate": "rel/commands/migrate.sh"
   ]
