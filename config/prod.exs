@@ -14,7 +14,10 @@ use Mix.Config
 config :tater, Tater.Endpoint,
   http: [port: 6001],
   url: [host: "tater.einsteinsandbox.com", port: 80],
-  cache_static_manifest: "priv/static/manifest.json"
+  cache_static_manifest: "priv/static/manifest.json",
+  server: true,
+  root: ".",
+  version: Application.spec(:tater, :vsn)
 
 # Do not print debug messages in production
 config :logger, level: :info
