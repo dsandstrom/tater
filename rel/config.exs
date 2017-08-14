@@ -30,7 +30,7 @@ end
 environment :stag do
   set include_erts: true
   set include_src: false
-  set cookie: :"+Z,e<pp^CeW>e@l$tl[~h6Y4!VVFiY_~/['k=M[O!fLq+Lj>S3xGTntq~op1zi3["
+  set cookie: :"oZ,e9pp^CeW>e@l$tl[~h6Y4!VVFiY_~/['k=M[O!fLq+Lj>S3xGTntq~op1zi3["
 end
 
 environment :prod do
