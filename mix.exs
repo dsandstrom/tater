@@ -19,7 +19,7 @@ defmodule Tater.Mixfile do
   def application do
     [mod: {Tater, []}, applications:
       [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-       :phoenix_ecto, :postgrex, :scrivener_ecto, :scrivener_html,
+       :phoenix_ecto, :postgrex, :timex_ecto, :scrivener_ecto, :scrivener_html,
        :phoenix_html_simplified_helpers, :logger_file_backend]]
   end
 
