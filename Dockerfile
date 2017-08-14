@@ -38,6 +38,7 @@ RUN wget https://nodejs.org/download/release/v${NODE_VERSION}/node-v${NODE_VERSI
 RUN tar --strip-components 1 -xzvf node-v* -C /usr/local
 
 # Build Phoenix app
+# TODO: compile app in separate step, not part of container
 RUN mkdir /home/src
 COPY . /home/src
 RUN rm -rf /home/src/_build
@@ -47,10 +48,11 @@ RUN rm -rf /home/src/node_modules
 WORKDIR /home/src
 
 ENV MIX_ENV prod
+ENV DEPLOY_ENV stag
 RUN mix deps.get --only ${MIX_ENV}
 RUN npm install
 RUN npm run deploy
 RUN MIX_ENV=${MIX_ENV} mix phoenix.digest
-RUN MIX_ENV=${MIX_ENV} mix release --env=${MIX_ENV}
+RUN MIX_ENV=${MIX_ENV} mix release --env=${DEPLOY_ENV}
 
 WORKDIR /home

@@ -27,6 +27,12 @@ environment :dev do
   set cookie: :"m1?|_hy!F5N3=t1`O:9Qzq0ARG.Pp}`JlN!LK?:c)3;0I2m=%(Cki4DkCX2h&}8&"
 end
 
+environment :stag do
+  set include_erts: true
+  set include_src: false
+  set cookie: :"+Z,e<pp^CeW>e@l$tl[~h6Y4!VVFiY_~/['k=M[O!fLq+Lj>S3xGTntq~op1zi3["
+end
+
 environment :prod do
   set include_erts: true
   set include_src: false
