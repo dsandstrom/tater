@@ -32,6 +32,7 @@ defmodule Tater.ReleaseTasks do
     # Run migrations
     Enum.each(@myapps, &run_migrations_for/1)
 
+    # TODO: add seeds for staging
     # # Run the seed script if it exists
     # seed_script = Path.join([priv_dir(:tater), "repo", "seeds.exs"])
     # if File.exists?(seed_script) do
