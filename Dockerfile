@@ -47,7 +47,7 @@ RUN rm -rf /home/src/deps
 RUN rm -rf /home/src/node_modules
 
 ENV MIX_ENV prod
-ENV DEPLOY_ENV stag
+ENV DEPLOY_ENV prod
 RUN mix deps.get --only ${MIX_ENV}
 RUN npm install
 RUN npm run deploy

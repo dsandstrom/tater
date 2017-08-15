@@ -1,0 +1,155 @@
+#!/bin/bash
+
+APP="tater"
+REMOTE_USER="deploy"
+SERVER="levine-0"
+
+BUILD_DIR="/http/www/t/tater.einsteinsandbox.com/Tater"
+RELEASES_DIR="/http/www/t/tater.einsteinsandbox.com/Tater/releases"
+CURRENT_DIR="/http/www/t/tater.einsteinsandbox.com/Tater/current"
+DEPLOY_DIR="/opt/${APP}"
+
+LOG_FILE="tmp/log/deploy.log"
+
+############
+
+VERSION=`awk '/version: \"(.*)\"/{ print $2 }' ./mix.exs | cut -d '"' -f2`
+
+deploy() {
+  echo -e "Deploying ${APP} v${VERSION} to ${SERVER}"
+  echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+  # TODO: check for already compiled file before making a new one
+
+  touch $LOG_FILE
+
+  # ### Clean
+  # echo -e "--> Cleaning local source tree\n"
+  # mix clean
+  # rm -rf priv/images
+  # rm -rf priv/static/*
+  # rm priv/server.js
+  # rm priv/webpack.stats.json
+  # # ... add any other files here you feel should be removed
+  #
+  # ### Copy current code
+  # echo -e "--> Uploading sources\n"
+  # rsync -azq --exclude='.git/' --exclude="_build/" --exclude="deps/" --exclude="app/node_modules" ./ ${REMOTE_USER}@${SERVER}:${BUILD_DIR}
+  #
+  # ### Build on remote
+  # echo -e "--> Building on remote\n"
+  # ssh ${REMOTE_USER}@${SERVER} -- "cd ${BUILD_DIR} && mix deps.get --only prod"
+  # ssh ${REMOTE_USER}@${SERVER} -- "cd ${BUILD_DIR} && MIX_ENV=prod mix compile"
+  # echo -e "--> Compiling assets on remote\n"
+  # ssh ${REMOTE_USER}@${SERVER} -- "cd ${BUILD_DIR}/app && npm install"
+  # ssh ${REMOTE_USER}@${SERVER} -- "cd ${BUILD_DIR} && cd app && node node_modules/webpack/bin/webpack.js -p"
+  # ssh ${REMOTE_USER}@${SERVER} -- "cd ${BUILD_DIR} && MIX_ENV=prod mix phoenix.digest"
+  # ssh ${REMOTE_USER}@${SERVER} -- "cd ${BUILD_DIR} && MIX_ENV=prod mix release"
+  #
+  # echo -e "--> Moving release to deployment dir\n"
+  # ssh ${REMOTE_USER}@${SERVER} -- "cd ${BUILD_DIR} && cp -R rel/${APP}/releases/${VERSION}/${APP}.tar.gz ${DEPLOY_DIR}"
+  # ssh ${REMOTE_USER}@${SERVER} -- "cd ${DEPLOY_DIR} && tar -xf ${APP}.tar.gz"
+
+  TMP_DIR="tmp/releases/${VERSION}"
+  TMP_FILE="${TMP_DIR}/${APP}.tar.gz"
+
+  if [ -f $TMP_FILE ]; then
+    echo -e "~~~> Warning: Compiled app already exists\n"
+  else
+    echo -e "~~~> Building Docker container\n"
+    if [[ $(docker ps -q --filter "name=tater") ]]; then
+      docker rm -f ${APP} > /dev/null
+    fi
+    # TODO: stream to log file instead of overwriting
+    docker build -t ${APP} . > $LOG_FILE
+    docker run -it -d --name ${APP} ${APP} > $LOG_FILE
+    echo -e "~~~> Copying compiled app to tmp\n"
+    mkdir -p $TMP_DIR
+    docker cp $APP:/home/src/_build/prod/rel/$APP/releases/$VERSION/$APP.tar.gz $TMP_FILE
+  fi
+
+  RELEASE_DIR=$RELEASES_DIR/$VERSION
+  RELEASE_FILE=$RELEASE_DIR/$APP.tar.gz
+
+  echo -e "~~~> Deploying to ${SERVER}\n"
+  # TODO: check if exists
+  ssh ${REMOTE_USER}@${SERVER} -- "mkdir ${RELEASES_DIR}/${VERSION}"
+  rsync -r ${TMP_FILE} ${REMOTE_USER}@${SERVER}:${RELEASE_FILE}
+  #
+  ssh ${REMOTE_USER}@${SERVER} -- "cd ${RELEASE_DIR} && tar xzf ${RELEASE_FILE}"
+
+  echo -e "~~~> Restarting app\n"
+  ssh ${REMOTE_USER}@${SERVER} -- "${CURRENT_DIR}/bin/${APP} stop" > /dev/null
+  echo -e "ln -s ${RELEASE_DIR} ${CURRENT_DIR}"
+  ssh ${REMOTE_USER}@${SERVER} -- "ln -s ${RELEASE_DIR} ${CURRENT_DIR}"
+  ssh ${REMOTE_USER}@${SERVER} -- "${CURRENT_DIR}/bin/${APP} start"
+}
+
+migrate() {
+  echo -e "--> Running migrations\n"
+  ssh ${REMOTE_USER}@${SERVER} -- "cd ${BUILD_DIR} && MIX_ENV=prod mix ecto.migrate"
+}
+
+upgrade() {
+  echo -e "Upgrading to version ${VERSION}\n"
+  ssh ${REMOTE_USER}@${SERVER} -- "cd ${DEPLOY_DIR} && bin/${APP} upgrade ${VERSION}"
+}
+
+downgrade() {
+  echo -e "Not yet implemented"
+}
+
+start() {
+  ssh ${REMOTE_USER}@${SERVER} -- "cd ${DEPLOY_DIR} && bin/${APP} start"
+}
+
+stop() {
+  ssh ${REMOTE_USER}@${SERVER} -- "cd ${DEPLOY_DIR} && bin/${APP} stop"
+}
+
+restart() {
+  ssh ${REMOTE_USER}@${SERVER} -- "cd ${DEPLOY_DIR} && bin/${APP} restart"
+}
+
+console() {
+  ssh ${REMOTE_USER}@${SERVER} -- "cd ${DEPLOY_DIR} && bin/${APP} remote_console"
+}
+
+clean() {
+  echo -e "--> Cleaning build dir on remote\n"
+  ssh ${REMOTE_USER}@${SERVER} -- "rm -rf ${BUILD_DIR}/*"
+}
+
+case "$1" in
+  deploy)
+    deploy
+    ;;
+  migrate)
+    migrate
+    ;;
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    stop
+    start
+    ;;
+  upgrade)
+    upgrade
+    ;;
+  downgrade)
+    downgrade
+    ;;
+  console)
+    console
+    ;;
+  clean)
+    clean
+    ;;
+  *)
+    echo "Usage: $0 {deploy|migrate|upgrade|downgrade|stop|start|restart|clean}" >&2
+    exit 1
+    ;;
+esac
