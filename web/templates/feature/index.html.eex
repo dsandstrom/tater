@@ -4,6 +4,8 @@
                           class: "button button-success" %>
 </header>
 
+<p>New version</p>
+
 <%= render "_pagination.html", page: @page, show_info: false %>
 
 <%= render_features @features, @conn %>
