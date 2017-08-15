@@ -3,7 +3,7 @@ defmodule Tater.Mixfile do
 
   def project do
     [app: :tater,
-     version: "0.2.0",
+     version: "0.3.0",
      elixir: "~> 1.2",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
