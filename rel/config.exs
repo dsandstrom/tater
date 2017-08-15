@@ -47,6 +47,7 @@ end
 release :tater do
   set version: current_version(:tater)
   set commands: [
-    "migrate": "rel/commands/migrate.sh"
+    "migrate": "rel/commands/migrate.sh",
+    "seed": "rel/commands/seed.sh"
   ]
 end

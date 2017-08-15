@@ -3,12 +3,14 @@ defmodule Tater.ReleaseTasks do
   Task for distillery releases
   """
 
+  # TODO: add tests
+
   @start_apps [
     :postgrex,
     :ecto
   ]
 
-  @myapps [
+  @apps [
     :tater
   ]
 
@@ -16,7 +18,25 @@ defmodule Tater.ReleaseTasks do
     Tater.Repo
   ]
 
+  def migrate do
+    setup()
+
+    Enum.each(@apps, &run_migrations_for/1)
+
+    teardown()
+  end
+
   def seed do
+    setup()
+
+    Enum.each(@apps, &run_seeds_file_for/1)
+
+    teardown()
+  end
+
+  def priv_dir(app), do: "#{:code.priv_dir(app)}"
+
+  defp setup do
     IO.puts "Loading tater.."
     # Load the code for tater, but don't start it
     :ok = Application.load(:tater)
@@ -28,30 +48,29 @@ defmodule Tater.ReleaseTasks do
     # Start the Repo(s) for tater
     IO.puts "Starting repos.."
     Enum.each(@repos, &(&1.start_link(pool_size: 1)))
+  end
 
-    # Run migrations
-    Enum.each(@myapps, &run_migrations_for/1)
-
-    # TODO: add seeds for staging
-    # # Run the seed script if it exists
-    # seed_script = Path.join([priv_dir(:tater), "repo", "seeds.exs"])
-    # if File.exists?(seed_script) do
-    #   IO.puts "Running seed script.."
-    #   Code.eval_file(seed_script)
-    # end
-
+  defp teardown do
     # Signal shutdown
     IO.puts "Success!"
     :init.stop()
   end
-
-  def priv_dir(app), do: "#{:code.priv_dir(app)}"
 
   defp run_migrations_for(app) do
     IO.puts "Running migrations for #{app}"
     Ecto.Migrator.run(Tater.Repo, migrations_path(app), :up, all: true)
   end
 
-  defp migrations_path(app), do: Path.join([priv_dir(app), "repo", "migrations"])
-  # defp seed_path(app), do: Path.join([priv_dir(app), "repo", "seeds.exs"])
+  defp run_seeds_file_for(app) do
+    seed_script = seeds_path(app)
+    if File.exists?(seed_script) do
+      IO.puts "Running seed script for #{app}"
+      Code.eval_file(seed_script)
+    end
+  end
+
+  defp migrations_path(app), do:
+    Path.join([priv_dir(app), "repo", "migrations"])
+
+  defp seeds_path(app), do: Path.join([priv_dir(app), "repo", "seeds.exs"])
 end
