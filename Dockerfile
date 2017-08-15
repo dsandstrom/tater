@@ -40,13 +40,11 @@ RUN tar --strip-components 1 -xzvf node-v* -C /usr/local
 # Build Phoenix app
 # TODO: compile app in separate step, not part of container
 RUN mkdir /home/src
-# TODO: clone master branch instead of copying
+WORKDIR /home/src
 COPY . /home/src
 RUN rm -rf /home/src/_build
-RUN rm -rf /home/src/.git
 RUN rm -rf /home/src/deps
 RUN rm -rf /home/src/node_modules
-WORKDIR /home/src
 
 ENV MIX_ENV prod
 ENV DEPLOY_ENV stag
