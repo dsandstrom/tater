@@ -25,16 +25,15 @@ deploy() {
   TMP_FILE="${TMP_DIR}/${APP}.tar.gz"
 
   if [ -f $TMP_FILE ]; then
-    echo -e "~~~> Warning: Compiled app already exists\n"
+    echo -e "~~~> Warning: Compiled app already exists"
   else
-    echo -e "~~~> Building Docker container\n"
+    echo -e "~~~> Compiling in container"
     if [[ $(docker ps -q --filter "name=tater") ]]; then
       docker rm -f ${APP} > /dev/null
     fi
     # TODO: stream to log file instead of overwriting
     docker build -t ${APP} . > $LOG_FILE
     docker run -it -d --name ${APP} ${APP} > $LOG_FILE
-    echo -e "~~~> Copying compiled app to tmp\n"
     mkdir -p $TMP_DIR
     docker cp $APP:/home/src/_build/prod/rel/$APP/releases/$VERSION/$APP.tar.gz $TMP_FILE
   fi
@@ -42,18 +41,18 @@ deploy() {
   RELEASE_DIR=$RELEASES_DIR/$VERSION
   RELEASE_FILE=$RELEASE_DIR/$APP.tar.gz
 
-  echo -e "~~~> Deploying to ${SERVER}\n"
+  echo -e "~~~> Deploying to ${SERVER}"
   if ssh ${REMOTE_USER}@${SERVER} -- "stat $RELEASE_FILE > /dev/null 2>&1" > /dev/null 2>&1; then
-    echo -e "~~~> Warning: Current version already deployed\n"
+    echo -e "~~~> Warning: Current version already deployed"
   else
     ssh ${REMOTE_USER}@${SERVER} -- "mkdir ${RELEASES_DIR}/${VERSION}" > /dev/null 2>&1
     rsync -r ${TMP_FILE} ${REMOTE_USER}@${SERVER}:${RELEASE_FILE} > /dev/null 2>&1
   fi
-  if ! ssh ${REMOTE_USER}@${SERVER} -- "stat $RELEASE_PATH/bin > /dev/null 2>&1" > /dev/null 2>&1; then
+  if ! ssh ${REMOTE_USER}@${SERVER} -- "stat ${RELEASE_DIR}/bin > /dev/null 2>&1" > /dev/null 2>&1; then
     ssh ${REMOTE_USER}@${SERVER} -- "cd ${RELEASE_DIR} && tar xzf ${RELEASE_FILE}" > /dev/null 2>&1
   fi
 
-  echo -e "~~~> Restarting app\n"
+  echo -e "~~~> Restarting app"
   ssh ${REMOTE_USER}@${SERVER} -- "${CURRENT_DIR}/bin/${APP} stop" > /dev/null 2>&1
   ssh ${REMOTE_USER}@${SERVER} -- "rm ${CURRENT_DIR} > /dev/null 2>&1 && ln -s ${RELEASE_DIR} ${CURRENT_DIR}" > /dev/null 2>&1
   ssh ${REMOTE_USER}@${SERVER} -- "${CURRENT_DIR}/bin/${APP} start" > /dev/null 2>&1
