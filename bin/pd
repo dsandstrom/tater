@@ -17,7 +17,7 @@ VERSION=`awk '/version: \"(.*)\"/{ print $2 }' ./mix.exs | cut -d '"' -f2`
 
 deploy() {
   echo -e "Deploying ${APP} v${VERSION} to ${SERVER}"
-  echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+  echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
   # TODO: check for already compiled file before making a new one
 
   touch $LOG_FILE
