@@ -53,9 +53,9 @@ deploy() {
   fi
 
   echo -e "~~~> Restarting app"
-  ssh ${REMOTE_USER}@${SERVER} -- "${CURRENT_DIR}/bin/${APP} stop" > /dev/null 2>&1
+  stop
   ssh ${REMOTE_USER}@${SERVER} -- "rm ${CURRENT_DIR} > /dev/null 2>&1 && ln -s ${RELEASE_DIR} ${CURRENT_DIR}" > /dev/null 2>&1
-  ssh ${REMOTE_USER}@${SERVER} -- "${CURRENT_DIR}/bin/${APP} start" > /dev/null 2>&1
+  start
 }
 
 migrate() {
@@ -64,8 +64,9 @@ migrate() {
 }
 
 upgrade() {
-  echo -e "Upgrading to version ${VERSION}\n"
-  ssh ${REMOTE_USER}@${SERVER} -- "cd ${DEPLOY_DIR} && bin/${APP} upgrade ${VERSION}"
+  # echo -e "Upgrading to version ${VERSION}\n"
+  # ssh ${REMOTE_USER}@${SERVER} -- "cd ${DEPLOY_DIR} && bin/${APP} upgrade ${VERSION}"
+  echo -e "Not yet implemented"
 }
 
 downgrade() {
@@ -73,24 +74,24 @@ downgrade() {
 }
 
 start() {
-  ssh ${REMOTE_USER}@${SERVER} -- "cd ${DEPLOY_DIR} && bin/${APP} start"
+  ssh ${REMOTE_USER}@${SERVER} -- "${CURRENT_DIR}/bin/${APP} start" > /dev/null 2>&1
 }
 
 stop() {
-  ssh ${REMOTE_USER}@${SERVER} -- "cd ${DEPLOY_DIR} && bin/${APP} stop"
+  ssh ${REMOTE_USER}@${SERVER} -- "${CURRENT_DIR}/bin/${APP} stop" > /dev/null 2>&1
 }
 
 restart() {
-  ssh ${REMOTE_USER}@${SERVER} -- "cd ${DEPLOY_DIR} && bin/${APP} restart"
+  ssh ${REMOTE_USER}@${SERVER} -- "${CURRENT_DIR}/bin/${APP} restart" > /dev/null 2>&1
 }
 
 console() {
-  ssh ${REMOTE_USER}@${SERVER} -- "cd ${DEPLOY_DIR} && bin/${APP} remote_console"
+  ssh ${REMOTE_USER}@${SERVER} -- "${CURRENT_DIR}/bin/${APP} remote_console"
 }
 
 clean() {
-  echo -e "--> Cleaning build dir on remote\n"
-  ssh ${REMOTE_USER}@${SERVER} -- "rm -rf ${BUILD_DIR}/*"
+  # TODO: remove old versions
+  echo -e "Not yet implemented"
 }
 
 case "$1" in
@@ -107,8 +108,7 @@ case "$1" in
     stop
     ;;
   restart)
-    stop
-    start
+    restart
     ;;
   upgrade)
     upgrade
