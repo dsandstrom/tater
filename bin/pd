@@ -79,8 +79,7 @@ deploy() {
 
   echo -e "~~~> Restarting app\n"
   ssh ${REMOTE_USER}@${SERVER} -- "${CURRENT_DIR}/bin/${APP} stop" > /dev/null
-  echo -e "ln -s ${RELEASE_DIR} ${CURRENT_DIR}"
-  ssh ${REMOTE_USER}@${SERVER} -- "ln -s ${RELEASE_DIR} ${CURRENT_DIR}"
+  ssh ${REMOTE_USER}@${SERVER} -- "rm ${CURRENT_DIR} && ln -s ${RELEASE_DIR} ${CURRENT_DIR}"
   ssh ${REMOTE_USER}@${SERVER} -- "${CURRENT_DIR}/bin/${APP} start"
 }
 
