@@ -59,8 +59,8 @@ deploy() {
 }
 
 migrate() {
-  echo -e "--> Running migrations\n"
-  ssh ${REMOTE_USER}@${SERVER} -- "cd ${BUILD_DIR} && MIX_ENV=prod mix ecto.migrate"
+  echo -e "--> Running migrations"
+  ssh ${REMOTE_USER}@${SERVER} -- "${CURRENT_DIR}/bin/${APP} migrate" > /dev/null 2>&1
 }
 
 upgrade() {
