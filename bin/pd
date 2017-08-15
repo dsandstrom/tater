@@ -31,9 +31,8 @@ deploy() {
     if [[ $(docker ps -q --filter "name=tater") ]]; then
       docker rm -f ${APP} > /dev/null
     fi
-    # TODO: stream to log file instead of overwriting
-    docker build -t ${APP} . > $LOG_FILE
-    docker run -it -d --name ${APP} ${APP} > $LOG_FILE
+    docker build -t ${APP} . >> $LOG_FILE
+    docker run -it -d --name ${APP} ${APP} >> $LOG_FILE
     mkdir -p $TMP_DIR
     docker cp $APP:/home/src/_build/prod/rel/$APP/releases/$VERSION/$APP.tar.gz $TMP_FILE
   fi
@@ -45,16 +44,16 @@ deploy() {
   if ssh ${REMOTE_USER}@${SERVER} -- "stat $RELEASE_FILE > /dev/null 2>&1" > /dev/null 2>&1; then
     echo -e "~~~> Warning: Current version already deployed"
   else
-    ssh ${REMOTE_USER}@${SERVER} -- "mkdir ${RELEASES_DIR}/${VERSION}" > /dev/null 2>&1
-    rsync -r ${TMP_FILE} ${REMOTE_USER}@${SERVER}:${RELEASE_FILE} > /dev/null 2>&1
+    ssh ${REMOTE_USER}@${SERVER} -- "mkdir ${RELEASES_DIR}/${VERSION}" >> $LOG_FILE 2>&1
+    rsync -r ${TMP_FILE} ${REMOTE_USER}@${SERVER}:${RELEASE_FILE} >> $LOG_FILE 2>&1
   fi
   if ! ssh ${REMOTE_USER}@${SERVER} -- "stat ${RELEASE_DIR}/bin > /dev/null 2>&1" > /dev/null 2>&1; then
-    ssh ${REMOTE_USER}@${SERVER} -- "cd ${RELEASE_DIR} && tar xzf ${RELEASE_FILE}" > /dev/null 2>&1
+    ssh ${REMOTE_USER}@${SERVER} -- "cd ${RELEASE_DIR} && tar xzf ${RELEASE_FILE}" >> $LOG_FILE 2>&1
   fi
 
   echo -e "~~~> Restarting app"
   stop
-  ssh ${REMOTE_USER}@${SERVER} -- "rm ${CURRENT_DIR} > /dev/null 2>&1 && ln -s ${RELEASE_DIR} ${CURRENT_DIR}" > /dev/null 2>&1
+  ssh ${REMOTE_USER}@${SERVER} -- "rm ${CURRENT_DIR} > /dev/null 2>&1 && ln -s ${RELEASE_DIR} ${CURRENT_DIR}" >> $LOG_FILE 2>&1
   start
 }
 
