@@ -44,7 +44,7 @@ defmodule Tater.Mixfile do
      {:dogma, "~> 0.1", only: :dev},
      {:scrivener_ecto, "~> 1.0"},
      {:scrivener_html, "~> 1.7"},
-     {:faker, "~> 0.8", only: :dev},
+     {:faker, "~> 0.8"},
      {:phoenix_html_simplified_helpers, "~> 1.2"},
      {:distillery, "~> 1.4", runtime: false},
      {:logger_file_backend, "~> 0.0.10"}]
