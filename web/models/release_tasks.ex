@@ -7,7 +7,8 @@ defmodule Tater.ReleaseTasks do
 
   @start_apps [
     :postgrex,
-    :ecto
+    :ecto,
+    :faker
   ]
 
   @apps [
