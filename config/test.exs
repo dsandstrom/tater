@@ -13,7 +13,7 @@ config :logger, level: :warn
 config :tater, Tater.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "postgres",
+  password: "",
   database: "tater_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
