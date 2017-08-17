@@ -13,7 +13,9 @@ defmodule Tater.LayoutView do
 
   defp flash_message(type, message) do
     content_tag :div, class: "alert alert-#{type}" do
-      content_tag(:p, message)
+      content_tag :div, class: "page" do
+        content_tag(:p, message)
+      end
     end
   end
 end

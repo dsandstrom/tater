@@ -15,11 +15,11 @@
     <div class="page-wrapper">
       <%= render Tater.SharedView, "header.html", assigns %>
 
+      <%= show_flash(@conn, :info) %>
+      <%= show_flash(@conn, :error) %>
+
       <main role="main" class="page-content">
         <div class="page">
-          <%= show_flash(@conn, :info) %>
-          <%= show_flash(@conn, :error) %>
-
           <%= render @view_module, @view_template, assigns %>
         </div>
       </main>

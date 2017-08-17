@@ -10,10 +10,10 @@ body {
 
 .page-content {
   flex-grow: 1;
+  margin-top: 2rem;
 }
 
 .page-header {
-  margin-bottom: 2rem;
   padding: 1.5rem 0;
   background: $color-dark;
   color: $color-initial;
@@ -107,11 +107,10 @@ body {
 }
 
 .alert {
-  margin-bottom: 2rem;
-  padding: 1rem;
+  padding: 1rem 0;
   border-left: 3px solid $color-primary;
-  border-radius: 0 $theme-border-radius $theme-border-radius 0;
-  background: $lighter-gray;
+  background: $light-gray;
+  color: $dark-gray;
 
   p:first-child {
     font-weight: bold;
@@ -128,6 +127,15 @@ body {
 
   &.alert-info {
     border-color: $color-success;
+  }
+}
+
+form {
+  .alert {
+    margin-bottom: 2rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    border-radius: 0 $theme-border-radius $theme-border-radius 0;
   }
 }
 
