@@ -28,7 +28,7 @@ deploy() {
     echo -e "~~~> Warning: Compiled app already exists"
   else
     echo -e "~~~> Compiling in container"
-    if [[ $(docker ps -q --filter "name=tater") ]]; then
+    if [[ $(docker ps -q --filter "name=${APP}") ]]; then
       docker rm -f ${APP} > /dev/null
     fi
     docker build -t ${APP} . >> $LOG_FILE
