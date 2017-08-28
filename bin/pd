@@ -37,6 +37,11 @@ deploy() {
     docker cp $APP:/home/src/_build/prod/rel/$APP/releases/$VERSION/$APP.tar.gz $TMP_FILE
   fi
 
+  if [ ! -f $TMP_FILE ]; then
+    echo "-> Error: Compilation was unsuccessful"
+    exit 1
+  fi
+
   RELEASE_DIR=$RELEASES_DIR/$VERSION
   RELEASE_FILE=$RELEASE_DIR/$APP.tar.gz
 
